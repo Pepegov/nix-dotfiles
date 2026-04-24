@@ -1,18 +1,26 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  mkRider = name: shell: pkgs.makeDesktopItem {
-    name = "rider-${shell}";
-    desktopName = "Rider (${name})";
-    exec = "nix develop /etc/nixos/flake#${shell} --command rider %u";
-    icon = "jetbrains-rider";
-    type = "Application";
-    categories = [ "Development" "IDE" ];
-    startupWMClass = "jetbrains-rider";
-  };
+  mkRider = name: shell:
+    let
+      desktop = pkgs.makeDesktopItem {
+        name = "rider-${shell}";
+        desktopName = "Rider (${name})";
+        exec = "nix develop ${config.home.homeDirectory}/nix\\#${shell} --command rider %u";
+        icon = "rider";
+        type = "Application";
+        categories = [ "Development" "IDE" ];
+        startupWMClass = "jetbrains-rider";
+      };
+
+      script = pkgs.writeShellScriptBin "rider-${shell}" ''
+        exec nix develop /etc/nixos/flake#default --command rider "$@"
+      '';
+    in
+    [ desktop script ];
 in
 {
-  environment.systemPackages = with pkgs; [
-    (mkRider "Blazor" "blazor")
-  ];
+  home.packages =
+    (mkRider "Blazor" "blazor");
+    # ++ (mkRider "Razor" "razor");
 }
