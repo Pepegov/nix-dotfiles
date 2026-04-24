@@ -10,3 +10,7 @@ Update home-manager
 ```bash
 home-manager switch --flake ~/nix
 ```
+or
+```bash
+home-manager switch --flake ~/nix#username
+```

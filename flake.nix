@@ -44,12 +44,12 @@
       ];
     };
 
-    homeConfigurations.pepegov = home-manager.lib.homeMangerConfiguration {
+    homeConfigurations.pepegov = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
-      modules = [ "./home-manager/home.nix" ];
+      modules = [ ./home-manager/home.nix ];
     };
 
-    devShells.${system}.default = pkgs.mkShell {
+    devShells.${system}.blazor = pkgs.mkShell {
       buildInputs = [
         dotnet
         pkgs.nodejs_20

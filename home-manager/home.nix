@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
 	imports = [
     	#	./modules/plasma-mime.nix
+			./modules/nix-shell.nix
   	];
 
 	home = {
