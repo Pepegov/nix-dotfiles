@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,8 +40,13 @@
       };
 
       modules = [
-        ./configuration.nix
+        ./nixos/configuration.nix
       ];
+    };
+
+    homeConfigurations.pepegov = home-manager.lib.homeMangerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      modules = [ "./home-manager/home.nix" ];
     };
 
     devShells.${system}.default = pkgs.mkShell {
@@ -70,31 +75,6 @@
         dotnet --version
       '';
     };
-
-    # devShells.${system}.default = pkgs.mkShell {
-    #   packages = [
-    #     (with pkgs.dotnetCorePackages; combinePackages [
-    #       sdk_8_0
-    #       sdk_9_0
-    #       sdk_10_0
-    #     ])
-    #   ];
-    #   DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}";
-    # };
-
-    # devShells.${system}.default = pkgs.mkShell {
-    #   packages = with pkgs; [
-    #     (dotnetCorePackages.combinePackages [
-    #       dotnetCorePackages.sdk_9_0
-    #     ])
-    #   ];
-
-    #   shellHook = ''
-    #     export DOTNET_ROOT="${pkgs.dotnetCorePackages.combinePackages [ pkgs.dotnetCorePackages.sdk_9_0 ]}/share/dotnet"
-    #     export DOTNET_MULTILEVEL_LOOKUP=0
-    #     echo "DOTNET_ROOT настроен для .NET 9"
-    #   '';
-    # };
   };
 
 }
