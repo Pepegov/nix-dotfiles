@@ -42,7 +42,7 @@
   users.users.pepegov = {
     isNormalUser = true;
     description = "Pepegov";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -104,6 +104,8 @@
 	mesa-demos
 	zip
 	unzip
+  kdePackages.ark
+  p7zip
 	home-manager
 
   chromium
