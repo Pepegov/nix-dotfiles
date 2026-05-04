@@ -6,7 +6,7 @@
 
   # Configure network proxy
   networking.proxy.default = "http://127.0.0.1:10808"; # For v2rayN
-  networking.proxy.noProxy = "127.0.0.1,localhost,pesni.fm,music.pesni.me,music.pesni.me,www.reddit.com,reddit.com,nextcloud.pepegov.ru,lkfl2.nalog.ru,nalog.ru,www.gosuslugi.ru,gosuslugi.ru,beeline.ru";
+  networking.proxy.noProxy = "127.0.0.1,localhost,pesni.fm,music.pesni.me,music.pesni.me,www.reddit.com,reddit.com,lkfl2.nalog.ru,nalog.ru,www.gosuslugi.ru,gosuslugi.ru,beeline.ru";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -24,7 +24,7 @@
     "L+ /home/pepegov/.local/share/v2rayN/bin/sing_box/sing-box - - - - ${pkgs.sing-box}/bin/sing-box"
   ];
 
-  environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
     v2rayn	
     v2ray-geoip          # для geoip.dat
     v2ray-domain-list-community  # для geosite.dat
@@ -35,4 +35,13 @@
     throne
     hysteria
   ];
+
+  networking.extraHosts = ''
+    # JetBrains
+    77.239.114.0 datalore.jetbrains.com
+    77.239.114.0 plugins.jetbrains.com
+    77.239.114.0 download.jetbrains.com
+    77.239.114.0 api.jetbrains.ai
+    77.239.114.0 account.jetbrains.com
+  '';
 }

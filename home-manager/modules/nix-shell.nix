@@ -14,13 +14,14 @@ let
       };
 
       script = pkgs.writeShellScriptBin "rider-${shell}" ''
-        exec nix develop /etc/nixos/flake#default --command rider "$@"
+        exec nix develop ${config.home.homeDirectory}/nix#${shell} --command rider "$@"
       '';
     in
     [ desktop script ];
 in
 {
   home.packages =
-    (mkRider "Blazor" "blazor");
+    (mkRider "Blazor" "blazor")
+    ++ (mkRider "Avalonia" "avalonia");
     # ++ (mkRider "Razor" "razor");
 }

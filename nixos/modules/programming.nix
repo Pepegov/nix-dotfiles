@@ -45,6 +45,7 @@ in
     dotnetCorePackages.runtime_9_0
     dotnetCorePackages.runtime_10_0
 
+    avalonia
     dotnet-ef
     msbuild
 
