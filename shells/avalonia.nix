@@ -16,9 +16,9 @@ let
 
   skiaDeps = with pkgs; [
     libGL
-    libX11
-    libXext
-    libXrender
+    xorg.libX11
+    xorg.libXext
+    xorg.libXrender
     fontconfig
   ];
 in
@@ -41,7 +41,6 @@ pkgs.mkShell {
 
     # Avalonia требует графических библиотек в LD_LIBRARY_PATH
     export LD_LIBRARY_PATH="$(printf "%s:" ${pkgs.lib.makeLibraryPath skiaDeps})$LD_LIBRARY_PATH"
-    export NIX_LD_LIBRARY_PATH="${skiaSharp}/lib:${libPaths}:$NIX_LD_LIBRARY_PATH"
 
     echo "Avalonia UI dev shell ready"
     dotnet --version

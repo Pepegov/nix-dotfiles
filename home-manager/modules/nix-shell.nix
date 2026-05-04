@@ -6,7 +6,7 @@ let
       desktop = pkgs.makeDesktopItem {
         name = "rider-${shell}";
         desktopName = "Rider (${name})";
-        exec = "nix develop ${config.home.homeDirectory}/nix\\#${shell} --command rider %u";
+        exec = "${script}/bin/rider-${shell}";
         icon = "rider";
         type = "Application";
         categories = [ "Development" "IDE" ];
