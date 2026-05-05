@@ -17,6 +17,11 @@
       recursive = true;
     };
 
+    "picom" = {
+      source = ./config/picom;
+      recursive = true;
+    };
+
     "startup.sh" = {
       source = ./config/startup.sh;     
       executable = true;
