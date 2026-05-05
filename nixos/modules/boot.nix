@@ -6,7 +6,6 @@
         ];
 
         initrd.kernelModules = [
-            "tun"
             "amdgpu"
         ];
 

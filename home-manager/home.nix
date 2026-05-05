@@ -24,12 +24,6 @@
 		};
 	};
 
-	programs.git = {
-		enable = true;
-		settings.user.name = "pepegov";
-		settings.user.email = "andelismore@gmail.com";
-	};
-
 	#programs.rofi = {
 	#	enable = true;
 		#package = pkgs.rofi-wayland; # если ты на Wayland

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 let
   dotnet = pkgs.dotnetCorePackages.combinePackages [
@@ -27,15 +27,15 @@ in
     jetbrains.datagrip
     postman
     vscode
-    code-cursor
+    pkgs-unstable.code-cursor
 
     # .net
     #dotnet
     # aspnet
     # dotnet-runtime
-    pkgs.dotnetCorePackages.sdk_8_0
-    pkgs.dotnetCorePackages.sdk_9_0
-    pkgs.dotnetCorePackages.sdk_10_0
+    dotnetCorePackages.sdk_8_0
+    dotnetCorePackages.sdk_9_0
+    dotnetCorePackages.sdk_10_0
 
     dotnetCorePackages.aspnetcore_8_0
     dotnetCorePackages.aspnetcore_9_0

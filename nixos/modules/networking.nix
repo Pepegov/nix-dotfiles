@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  boot.initrd.kernelModules = [
+      "tun"
+  ];
+
   networking.hostName = "pepegov"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
