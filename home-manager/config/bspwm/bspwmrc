@@ -1,9 +1,6 @@
 #!/bin/sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-picom &
-
-$HOME/.config/startup.sh &
 
 # Привязка рабочих столов к монитору(ам) -d
 if [ -n "$DISPLAY_EXTERNAL" ]; then
@@ -67,3 +64,6 @@ $HOME/.config/polybar/launch.sh
 if [ -n "$DISPLAY_EXTERNAL" ]; then
 	$HOME/.config/polybar/launch_additional.sh
 fi
+
+picom &
+$HOME/.config/startup.sh &

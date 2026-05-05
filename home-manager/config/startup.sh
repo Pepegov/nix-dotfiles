@@ -2,7 +2,7 @@
 setxkbmap us,ru -option grp:alt_shift_toggle &
 clipit &
 alacritty &
-firefox &
+(sleep 3; firefox) &
 v2rayN &
 blueberry &
 nextcloud &

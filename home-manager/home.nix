@@ -2,6 +2,8 @@
 	imports = [
     	#	./modules/plasma-mime.nix
 			./modules/nix-shell.nix
+			./modules/git.nix
+			./modules/config.nix
   	];
 
 	home = {
