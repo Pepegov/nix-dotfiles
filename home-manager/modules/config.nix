@@ -16,4 +16,9 @@
       source = ./config/polybar;
       recursive = true;
     };
+
+    "startup.sh" = {
+      source = ./config/startup.sh;     
+      executable = true;
+    };
 }
