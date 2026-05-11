@@ -14,9 +14,14 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, vscode-extensions, ... }@inputs:
   let
     system = "x86_64-linux";
     dotnet = pkgs.dotnet-sdk_9;
@@ -45,7 +50,13 @@
     };
 
     homeConfigurations.pepegov = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit pkgs;                    
+
+      extraSpecialArgs = {
+        inherit inputs;
+        pkgs-unstable = pkgs-unstable;
+      };
+      
       modules = [ ./home-manager/home.nix ];
     };
 

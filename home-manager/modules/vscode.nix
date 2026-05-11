@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
+let
+  vscode-ext = inputs.vscode-extensions.extensions.${pkgs.system}.vscode-marketplace;
+in
 {
+  nixpkgs.config.allowUnfree = true;   #
+
   home.packages = with pkgs; [
     jetbrains-mono
   ];
@@ -9,33 +14,34 @@
     enable = true;
     package = pkgs.vscode;
 
-    extensions = with pkgs.vscode-extensions; [
-      alefragnani.project-manager
-      arrterian.nix-env-selector
-      bbenoist.nix
-      dlasagno.rasi
-      edwinsulaiman.jetbrains-rider-dark-theme
-      github.vscode-github-actions
-      isudox.vscode-jetbrains-keybindings
-      jnoortheen.nix-ide
-      mkhl.direnv
-      ms-azuretools.vscode-containers
-      ms-python.debugpy
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-python.vscode-python-envs
-      ms-vscode.cmake-tools
-      ms-vscode.cpp-devtools
-      ms-vscode.cpptools
-      ms-vscode.cpptools-extension-pack
-      ms-vscode.cpptools-themes
-      ms-vscode.vscode-serial-monitor
-      pinage404.nix-extension-pack
-      tamasfe.even-better-toml
-      vscode-arduino.vscode-arduino-community
-    ];
+    profiles.default = {
+      extensions = with vscode-ext; [
+        alefragnani.project-manager
+        arrterian.nix-env-selector
+        bbenoist.nix
+        edwinsulaiman.jetbrains-rider-dark-theme
+        github.vscode-github-actions
+        isudox.vscode-jetbrains-keybindings
+        jnoortheen.nix-ide
+        mkhl.direnv
+        ms-azuretools.vscode-containers
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-python.debugpy
+        ms-python.vscode-python-envs
+        ms-vscode.cmake-tools
+        ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
+        ms-vscode.cpptools-themes
+        ms-vscode.cpp-devtools
+        ms-vscode.vscode-serial-monitor
+        pinage404.nix-extension-pack
+        tamasfe.even-better-toml
+        vscode-arduino.vscode-arduino-community
+        dlasagno.rasi
+      ];
 
-    programs.vscode.userSettings = {
+    userSettings = {
       # ---------- THEME ----------
       "workbench.colorTheme" = "JetBrains Rider Dark Theme";
       "workbench.iconTheme" = "vs-seti";
@@ -81,7 +87,7 @@
       "breadcrumbs.enabled" = true;
     };
 
-    programs.vscode.keybindings = [
+    keybindings = [
       # ---------- Navigation ----------
       { key = "ctrl+n"; command = "workbench.action.quickOpen"; }
       { key = "shift+shift"; command = "workbench.action.quickOpen"; }
@@ -111,5 +117,6 @@
       # ---------- Tabs ----------
       { key = "ctrl+tab"; command = "workbench.action.nextEditor"; }
     ];
+    };
   };
 }

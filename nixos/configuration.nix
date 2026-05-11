@@ -112,6 +112,8 @@
   clipit 
 	fswebcam
 	v4l-utils
+  fontforge #font view/edit
+  typora #md
 	scrot # Sreenshots
 	xclip # Copy screentshoot to buffer
 	xed-editor
