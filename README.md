@@ -3,7 +3,7 @@
 
 Update system
 ```bash
-sudo nixos-rebuild switch --flake ~/nix
+sudo nixos-rebuild switch --flake ~/nix --impure
 ```
 
 Update home-manager

@@ -42,11 +42,12 @@
   users.users.pepegov = {
     isNormalUser = true;
     description = "Pepegov";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" "tun" ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+  users.groups.tun = {};
 
   fonts.packages = with pkgs; [
     # обычные полезные шрифты

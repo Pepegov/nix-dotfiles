@@ -4,13 +4,18 @@
   boot.initrd.kernelModules = [
       "tun"
   ];
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+  };
+
 
   networking.hostName = "pepegov"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy
-  networking.proxy.default = "http://127.0.0.1:10808"; # For v2rayN
-  networking.proxy.noProxy = "127.0.0.1,localhost,pesni.fm,music.pesni.me,music.pesni.me,www.reddit.com,reddit.com,lkfl2.nalog.ru,nalog.ru,www.gosuslugi.ru,gosuslugi.ru,beeline.ru";
+  #networking.proxy.default = "http://127.0.0.1:10808"; # For v2rayN
+  #networking.proxy.noProxy = "127.0.0.1,localhost,pesni.fm,music.pesni.me,music.pesni.me,www.reddit.com,reddit.com,lkfl2.nalog.ru,nalog.ru,www.gosuslugi.ru,gosuslugi.ru,beeline.ru";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -40,6 +45,22 @@
     hysteria
     openvpn
   ];
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.runAsRoot = false;
+    onBoot = "start";
+  };
+
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+
+  services.openvpn.servers = {
+    officeVPN = {
+      config = builtins.readFile /home/pepegov/.vpn/ovpn/work/config.ovpn;
+      updateResolvConf = true;
+    };
+  };
+  systemd.services.openvpn-officeVPN.wantedBy = lib.mkForce [];
 
   networking.extraHosts = ''
     # JetBrains

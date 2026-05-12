@@ -6,6 +6,12 @@
         enable = true;
     };
 
+    environment.systemPackages = with pkgs; [
+        wineWow64Packages.stable
+        winetricks
+    ];
+    hardware.opengl.driSupport32Bit = true;
+
     # virt-manager
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
