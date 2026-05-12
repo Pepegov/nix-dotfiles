@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   boot.initrd.kernelModules = [
@@ -38,6 +38,7 @@
     wireguard-tools
     throne
     hysteria
+    openvpn
   ];
 
   networking.extraHosts = ''

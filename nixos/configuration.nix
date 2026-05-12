@@ -112,7 +112,7 @@
   clipit 
 	fswebcam
 	v4l-utils
-  fontforge #font view/edit
+  gnome-font-viewer #font view
   typora #md
 	scrot # Sreenshots
 	xclip # Copy screentshoot to buffer

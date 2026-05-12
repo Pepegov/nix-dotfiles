@@ -23,7 +23,7 @@ in
   environment.systemPackages = with pkgs; [
     # ui
     mongodb-compass
-    jetbrains.rider
+    pkgs-unstable.jetbrains.rider
     jetbrains.datagrip
     postman
     vscode

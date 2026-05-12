@@ -4,7 +4,8 @@
 			./modules/nix-shell.nix
 			./modules/git.nix
 			./modules/config.nix
-			./modules/vscode.nix
+			#./modules/vscode.nix
+			./modules/openvpn.nix
   	];
 
 	home = {
