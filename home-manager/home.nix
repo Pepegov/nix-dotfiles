@@ -5,6 +5,7 @@
 			./modules/git.nix
 			./modules/config.nix
 			#./modules/vscode.nix
+			./modules/apps.nix
   	];
 
 	home = {
