@@ -16,6 +16,7 @@
       ./modules/virtualisation.nix
       ./modules/kdeconnect.nix
       ./modules/programming.nix
+      ./modules/user.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -25,7 +26,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ru_RU.UTF-8";
     LC_IDENTIFICATION = "ru_RU.UTF-8";
@@ -37,17 +37,6 @@
     LC_TELEPHONE = "ru_RU.UTF-8";
     LC_TIME = "ru_RU.UTF-8";
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.pepegov = {
-    isNormalUser = true;
-    description = "Pepegov";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" "tun" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-  };
-  users.groups.tun = {};
 
   fonts.packages = with pkgs; [
     # обычные полезные шрифты
@@ -87,74 +76,65 @@
   xdg.mime.enable = true;
   xdg.menus.enable = true;  
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-
   environment.systemPackages = with pkgs; [
-	bash
-	wget
-	pciutils #for lspci
-	git
-	pass
-	htop
-  killall
-	ffmpeg
-	usbutils
-	openssl
-  
-	mesa-demos
-	zip
-	unzip
-  kdePackages.ark
-  p7zip
-	home-manager
+    bash
+    wget
+    pciutils #for lspci
+    git
+    pass
+    htop
+    killall
+    ffmpeg
+    usbutils
+    openssl
+    
+    mesa-demos
+    zip
+    unzip
+    kdePackages.ark
+    p7zip
+    home-manager
 
-  chromium
-  clipit 
-	fswebcam
-	v4l-utils
-  gnome-font-viewer #font view
-  typora #md
-	scrot # Sreenshots
-	xclip # Copy screentshoot to buffer
-	xed-editor
-	kdePackages.dolphin # File manager
-  kdePackages.kservice # For kbuildsycoca6
-  kdePackages.xdg-desktop-portal-kde
-  kdePackages.ffmpegthumbs
-	blueberry # Bluetooth configuration tool
-	alacritty # Terminal
-	vlc # Video loader
-	yandex-music # Music
-	eartag #simple ID3 tag manager
-	puddletag #ID3 tag manager
-	viewnior # Photo viewer
-	obs-studio
-	telegram-desktop 
-	obsidian 
-	nextcloud-client
-	qbittorrent
-	blueman
+    chromium
+    clipit 
+    fswebcam
+    v4l-utils
+    gnome-font-viewer #font view
+    typora #md
+    scrot # Sreenshots
+    xclip # Copy screentshoot to buffer
+    xed-editor
+    kdePackages.dolphin # File manager
+    kdePackages.kservice # For kbuildsycoca6
+    kdePackages.xdg-desktop-portal-kde
+    kdePackages.ffmpegthumbs
+    blueberry # Bluetooth configuration tool
+    alacritty # Terminal
+    vlc # Video loader
+    yandex-music # Music
+    eartag #simple ID3 tag manager
+    puddletag #ID3 tag manager
+    viewnior # Photo viewer
+    obs-studio
+    telegram-desktop 
+    obsidian 
+    nextcloud-client
+    qbittorrent
+    blueman
 
-    	libreoffice-qt
-    	hunspell
-    	hunspellDicts.uk_UA
-    	hunspellDicts.ru_RU
+    #libreoffice
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.ru_RU
 
-	#phone
-	android-file-transfer
-	jmtpfs
+    #phone
+    android-file-transfer
+    jmtpfs
   ];
 
-services.gvfs.enable = true; #phone
+  services.gvfs.enable = true; #phone
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   system.stateVersion = "25.11"; # Did you read the comment?
 }
