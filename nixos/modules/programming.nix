@@ -94,5 +94,9 @@ in
     direnv
     go
     postgresql
+    mariadb
   ];
+
+  services.postgresql.enable = false;
+  services.mysql.enable = false;
 }

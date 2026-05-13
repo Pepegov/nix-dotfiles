@@ -31,7 +31,7 @@ pkgs.mkShell {
   # основные пакеты
   nativeBuildInputs = [
     dotnet
-    bun
+    pkgs.bun
     pkgs.git
     pkgs.pkg-config
   ] ++ guiDeps;
@@ -47,7 +47,7 @@ pkgs.mkShell {
     # Avalonia требует графических библиотек в LD_LIBRARY_PATH
     export LD_LIBRARY_PATH="$(printf "%s:" ${pkgs.lib.makeLibraryPath skiaDeps})$LD_LIBRARY_PATH"
 
-    echo "Avalonia UI dev shell ready"
+    echo "Work dev shell ready"
     dotnet --version
   '';
 }

@@ -22,7 +22,7 @@ in
 {
   home.packages =
     (mkRider "Blazor" "blazor")
-    ++ (mkRider "Avalonia" "avalonia");
+    ++ (mkRider "Avalonia" "avalonia")
     ++ (mkRider "Work" "work");
     # ++ (mkRider "Razor" "razor");
 }

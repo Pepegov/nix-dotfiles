@@ -7,7 +7,7 @@
       
       # Modules
       ./modules/lock.nix
-      ./modules/networking.nix
+      ./modules/networking/networking.nix
       ./modules/boot.nix
       ./modules/hardware.nix
       ./modules/session.nix
