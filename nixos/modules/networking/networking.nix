@@ -8,6 +8,7 @@
     ./tun.nix
     ./v2rayn.nix
     ./v2raya.nix
+    ./zapret.nix
   ];
 
   #TODO возможно это не нужно
