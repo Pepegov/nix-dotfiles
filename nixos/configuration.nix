@@ -115,6 +115,7 @@
     eartag #simple ID3 tag manager
     puddletag #ID3 tag manager
     viewnior # Photo viewer
+    bind #nslookup
     obs-studio
     telegram-desktop 
     obsidian 
