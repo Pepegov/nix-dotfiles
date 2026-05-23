@@ -2,7 +2,8 @@
 
 let
   mkApp = {
-    name,
+      name,
+    desktopName ? name,
     exec,
 
     comment ? "Desktop application",
@@ -16,7 +17,7 @@ let
 
       desktop = pkgs.makeDesktopItem {
         name = name;
-        desktopName = name;
+        desktopName = desktopName;
         comment = comment;
 
         exec = "${script}/bin/${name}";
@@ -49,6 +50,13 @@ in
 
       comment = "U-SIEM desktop application";
       icon = "winetricks";
+    })
+    (mkApp {
+      name = "opencode-terminal";
+      desktopName = "OpenCode Terminal";
+      exec = "alacritty -e opencode";
+      comment = "OpenCode Terminal application";
+      icon = "Alacritty";
     })
   ];
 }

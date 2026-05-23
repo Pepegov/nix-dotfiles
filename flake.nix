@@ -19,6 +19,7 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, vscode-extensions, ... }@inputs:

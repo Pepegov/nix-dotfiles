@@ -4,6 +4,12 @@ let
   dotnet = pkgs.dotnetCorePackages.combinePackages [
     pkgs.dotnetCorePackages.sdk_9_0
     pkgs.dotnetCorePackages.sdk_10_0
+
+    pkgs.dotnetCorePackages.aspnetcore_9_0
+    pkgs.dotnetCorePackages.runtime_9_0
+
+    pkgs.dotnetCorePackages.aspnetcore_10_0
+    pkgs.dotnetCorePackages.runtime_10_0
   ];
 
 
@@ -62,7 +68,7 @@ pkgs.mkShell {
     export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     export SSL_CERT_DIR=/etc/ssl/certs
     
-    export DOTNET_ROOT=${dotnet}
+    # export DOTNET_ROOT=${dotnet}
     export PATH=$DOTNET_ROOT/bin:$PATH
 
     # Avalonia требует графических библиотек в LD_LIBRARY_PATH
@@ -72,6 +78,8 @@ pkgs.mkShell {
     export NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath aspireDeps}
 
     export DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
+    export ASPNETCORE_Kestrel__Certificates__Default__Path=~/.config/certificate/localhost.pfx
+    export ASPNETCORE_Kestrel__Certificates__Default__Password=
 
     echo "Work dev shell ready"
     dotnet --version

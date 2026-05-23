@@ -6,7 +6,6 @@
 			./modules/config.nix
 			#./modules/vscode.nix
 			./modules/apps.nix
-			./modules/certificate.nix
   	];
 
 	home = {
@@ -29,11 +28,5 @@
 			vpn-work-up   = "sudo systemctl start openvpn-officeVPN && sudo systemctl start zapret";
   		vpn-work-down = "sudo systemctl stop openvpn-officeVPN && sudo systemctl stop zapret";
 		};
-	};
-
-	my.certificate = {
-		enable = true;
-		domain = "localhost";
-		password = "";
 	};
 }

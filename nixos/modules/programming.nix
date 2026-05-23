@@ -18,6 +18,7 @@ let
     pkgs.dotnetCorePackages.runtime_9_0
     pkgs.dotnetCorePackages.runtime_10_0
   ];
+
 in
 {
   environment.systemPackages = with pkgs; [
@@ -27,12 +28,15 @@ in
     jetbrains.datagrip
     postman
     vscode
+  
+    # Ai tools
     pkgs-unstable.code-cursor
+    opencode
 
     # .net
     #dotnet
-    # aspnet
-    # dotnet-runtime
+    #aspnet
+    #dotnet-runtime
     dotnetCorePackages.sdk_8_0
     dotnetCorePackages.sdk_9_0
     dotnetCorePackages.sdk_10_0
@@ -93,10 +97,16 @@ in
     mage
     direnv
     go
+    p11-kit
+    
     postgresql
     mariadb
   ];
 
   services.postgresql.enable = false;
   services.mysql.enable = false;
+
+  security.pki.certificates = [
+    (builtins.readFile /home/pepegov/nix/hidden/ca.crt)
+  ];
 }

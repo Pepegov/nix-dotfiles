@@ -21,6 +21,11 @@
     recursive = true;
   };
 
+  home.file.".config/opencode" = {
+    source = ../config/opencode;
+    recursive = true;
+  };
+
   xdg.configFile = {
     "startup.sh" = {
       source = ../config/startup.sh;     

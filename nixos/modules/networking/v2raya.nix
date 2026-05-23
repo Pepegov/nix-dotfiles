@@ -7,7 +7,7 @@
     "PATH=/run/current-system/sw/bin:/run/wrappers/bin"
   ];
 
-  # Для TPROXY обычно нужны эти модули
+  # TPROXY modules
   boot.kernelModules = [ "xt_TPROXY" "xt_socket" "xt_mark" ];
   #services.v2raya.cliPackage = pkgs.xray;
 }

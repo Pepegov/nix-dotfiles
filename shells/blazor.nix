@@ -7,6 +7,7 @@ in
 pkgs.mkShell {
   buildInputs = [
     dotnet
+    pkgs.bun
     pkgs.nodejs_20
     pkgs.git
     pkgs.openssl
