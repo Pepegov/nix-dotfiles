@@ -10,6 +10,16 @@
       "type": "local",
       "command": ["npx", "-y", "@bitbonsai/mcpvault", "/home/pepegov/Nextcloud/PepegovDB"],
       "enabled": true
-    }
+    },
+    "dotnet": {
+      "type": "local",
+      "command": ["npx","-y","@modelcontextprotocol/server-dotnet"],
+      "enabled": true
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "enabled": true
+    },
   }
 }

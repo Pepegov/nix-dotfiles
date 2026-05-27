@@ -96,5 +96,7 @@
         libva-utils
         radeontop
         lshw
+        cudatoolkit
+        cudaPackages.cudnn
     ];
 }

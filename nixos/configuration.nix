@@ -17,6 +17,7 @@
       ./modules/kdeconnect.nix
       ./modules/programming.nix
       ./modules/user.nix
+      ./modules/mount.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -100,6 +101,9 @@
     ffmpeg
     usbutils
     openssl
+    
+    #ai
+    openai-whisper
     
     mesa-demos
     zip
