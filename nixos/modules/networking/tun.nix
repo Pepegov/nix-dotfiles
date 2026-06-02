@@ -7,6 +7,6 @@
 
   networking.firewall = {
     checkReversePath = "loose"; 
-    trustedInterfaces = [ "tun0" "singbox_tun" "singbox_tun0" ]; 
+    trustedInterfaces = [ "tun0" "tun_work" "singbox_tun" "singbox_tun0" ]; 
   };
 }

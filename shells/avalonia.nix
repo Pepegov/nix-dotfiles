@@ -1,51 +1,56 @@
 { pkgs }:
 
 let
-  #dotnet = pkgs.dotnet-sdk_10s;
   dotnet = pkgs.dotnetCorePackages.combinePackages [
     pkgs.dotnetCorePackages.sdk_8_0
     pkgs.dotnetCorePackages.sdk_10_0
   ];
 
-
+  # X11/Avalonia runtime dependencies
   guiDeps = with pkgs; [
     fontconfig
     freetype
+
     xorg.libX11
     xorg.libXext
     xorg.libXrender
     xorg.libXrandr
     xorg.libXi
     xorg.libXcursor
+    xorg.libXfixes
+
+    xorg.libICE
+    xorg.libSM
+
+    mesa
+    libGL
+
+    wayland
+
+    zlib
+    icu
   ];
 
-  skiaDeps = with pkgs; [
-    libGL
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    fontconfig
-  ];
 in
 
 pkgs.mkShell {
-  # основные пакеты
-  nativeBuildInputs = [
+  nativeBuildInputs = with pkgs; [
     dotnet
-    pkgs.git
-    pkgs.pkg-config
-  ] ++ guiDeps;
+    git
+    pkg-config
+  ];
 
-  # если нужно компилировать нативные зависимости
   buildInputs = guiDeps;
 
-  # переменные для dotnet
   shellHook = ''
     export DOTNET_ROOT=${dotnet}
     export PATH=$DOTNET_ROOT/bin:$PATH
 
-    # Avalonia требует графических библиотек в LD_LIBRARY_PATH
-    export LD_LIBRARY_PATH="$(printf "%s:" ${pkgs.lib.makeLibraryPath skiaDeps})$LD_LIBRARY_PATH"
+    # Runtime libraries for Avalonia / Skia / X11
+    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath guiDeps}:$LD_LIBRARY_PATH"
+
+    # Better compatibility with native .NET libs
+    export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
 
     echo "Avalonia UI dev shell ready"
     dotnet --version

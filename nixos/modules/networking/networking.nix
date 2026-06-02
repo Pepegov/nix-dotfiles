@@ -26,7 +26,7 @@
     xray
     sing-box
     sshuttle
-    openvpn
+    tcpdump
   ];
 
   # Enable networking
@@ -34,8 +34,11 @@
   networking.hostName = "pepegov"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Russ fix
   networking.extraHosts = ''
+    # Work
+    192.168.117.1 gitlab.umbrella.moscow
+    192.168.64.249 taiga.umbrella.moscow
+
     # JetBrains
     77.239.114.0 datalore.jetbrains.com
     77.239.114.0 plugins.jetbrains.com
