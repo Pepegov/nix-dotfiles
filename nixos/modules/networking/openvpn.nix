@@ -25,13 +25,13 @@ in
 {
   environment.systemPackages = with pkgs; [ openvpn ];
 
-  services.openvpn.servers.officeVPN = {
+  services.openvpn.servers.work = {
     config = fullConfig;
     updateResolvConf = true;
     autoStart = false;
   };
 
-  systemd.services.openvpn-officeVPN = {
+  systemd.services.openvpn-work = {
     postStart = lib.concatStringsSep "\n" (
       map (addr: "${pkgs.iproute2}/bin/ip rule add to ${addr} lookup main priority 90 2>/dev/null || true") transportIps
       ++ map (net: "${pkgs.iproute2}/bin/ip rule add to ${net} lookup main priority 91 2>/dev/null || true") corpSubnets
