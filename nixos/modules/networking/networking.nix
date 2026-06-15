@@ -26,6 +26,7 @@
     xray
     sing-box
     sshuttle
+    tor-browser
     tcpdump
   ];
 

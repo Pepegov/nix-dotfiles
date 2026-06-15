@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  baseConfig = builtins.readFile /home/pepegov/nix/hidden/work/config.ovpn;
+  baseConfig = builtins.readFile /home/pepegov/nix/hidden/work/work.ovpn;
   modifiedConfig = builtins.replaceStrings ["dev tun"] ["dev tun_work"] baseConfig;
   fullConfig = ''
     pull-filter ignore redirect-gateway

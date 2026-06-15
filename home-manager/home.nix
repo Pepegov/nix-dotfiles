@@ -24,7 +24,7 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			rebuild = "sudo nixos-rebuild switch --flake ~/nix";
+			rebuild = "sudo nixos-rebuild switch --flake ~/nix --impure";
 			vpn-work-up   = "sudo systemctl start openvpn-officeVPN && sudo systemctl start zapret";
   		vpn-work-down = "sudo systemctl stop openvpn-officeVPN && sudo systemctl stop zapret";
 		};
