@@ -25,8 +25,8 @@
 		enable = true;
 		shellAliases = {
 			rebuild = "sudo nixos-rebuild switch --flake ~/nix --impure";
-			vpn-work-up   = "sudo systemctl start openvpn-officeVPN && sudo systemctl start zapret";
-  		vpn-work-down = "sudo systemctl stop openvpn-officeVPN && sudo systemctl stop zapret";
+			vpn-work-up   = "sudo systemctl start openvpn-work && sudo systemctl start openvpn-work-infra";
+  		vpn-work-down = "sudo systemctl stop openvpn-work && sudo systemctl stop openvpn-work-infra";
 		};
 	};
 }
