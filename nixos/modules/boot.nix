@@ -7,6 +7,7 @@
 
         initrd.kernelModules = [
             "amdgpu"
+            "hid_magicmouse" #apple touchpad support
         ];
 
         loader = {
