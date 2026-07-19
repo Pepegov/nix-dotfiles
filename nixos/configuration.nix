@@ -18,6 +18,7 @@
       ./modules/programming.nix
       ./modules/user.nix
       ./modules/mount.nix
+      ./modules/magicmouse.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
