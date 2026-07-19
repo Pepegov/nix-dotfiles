@@ -83,6 +83,7 @@ in
     arduino
     gnumake
     screen
+    fritzing
 
     # rust
     cargo
