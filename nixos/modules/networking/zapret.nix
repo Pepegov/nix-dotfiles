@@ -5,20 +5,30 @@
     enable = true;
 
     params = [
+      # Основные параметры обхода
       "--dpi-desync=fake,disorder2"
       "--dpi-desync-autottl=2"
       "--dpi-desync-ttl=1"
       "--dpi-desync-fooling=badseq,md5sig"
+      
+      # Специфичные для UDP OpenVPN
+      "--dpi-desync-split-pos=2"
+      "--dpi-desync-split-pos=3"
+      "--dpi-desync-repeats=2"
+      
+      # Для UDP важно указывать порты
+      "--dpi-desync-udp-skip=0"  # Не пропускать UDP
+      "--dpi-desync-udp-thresh=0" # Обрабатывать все UDP
     ];
 
     whitelist = [
-      "vpn.umbrella.moscow" #work
+      "vpn.umbrella.moscow" # WORK
+      "ugrvpn.umbrella.moscow"  # WORK
       "youtube.com"
       "googlevideo.com"
       "ytimg.com"
       "youtu.be"
       "github.com"
-      
       "telegram.org"
       "t.me"
       "telegram.me"
@@ -31,15 +41,13 @@
       "kademlia.web.telegram.org"
     ];
 
-    # blacklist — всё кроме перечисленного (не рекомендуется)
-    # blacklist = [ "example.com" ];
+    udpPorts = [ "1199" "11000" "443" "53" ];
 
-    # Дополнительно
-    httpSupport = true;      # HTTP (80 порт), редко нужен
-    udpSupport = false;      # QUIC и прочий UDP
-    udpPorts = [ 11000 ];       #443 основной порт MTProto + QUIC
-    configureFirewall = true; # автоматически добавляет правила в iptables
+    httpSupport = true;
+    udpSupport = true;
+    configureFirewall = true;
   };
 
+  # Отключаем автостарт zapret, чтобы контролировать вручную
   systemd.services.zapret.wantedBy = lib.mkForce [];
 }

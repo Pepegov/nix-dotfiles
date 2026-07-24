@@ -21,7 +21,9 @@
     ];
 
     script = ''
-      modprobe -r hid_magicmouse
+      # sleep 3
+      modprobe -r hid_magicmouse || true
+      # modprobe hid_magicmouse
     '';
   };
 }

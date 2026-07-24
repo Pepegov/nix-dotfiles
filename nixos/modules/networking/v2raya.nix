@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  services.v2raya.enable = true;
+  services.v2raya.enable = false;
   # Чтобы сервис видел modprobe и networking tools
   systemd.services.v2raya.serviceConfig.Environment = [
     "PATH=/run/current-system/sw/bin:/run/wrappers/bin"

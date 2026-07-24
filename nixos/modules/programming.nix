@@ -32,6 +32,7 @@ in
     # Ai tools
     pkgs-unstable.code-cursor
     opencode
+    lmstudio
 
     # .net
     #dotnet
