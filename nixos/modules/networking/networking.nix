@@ -9,6 +9,7 @@
     ./v2rayn.nix
     ./v2raya.nix
     ./zapret.nix
+    ./throne.nix
   ];
 
   #TODO возможно это не нужно

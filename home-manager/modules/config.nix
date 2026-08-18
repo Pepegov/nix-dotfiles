@@ -27,8 +27,12 @@
   };
 
   xdg.configFile = {
+    "bspwm/rotate-monitor.sh" = {
+      source = ../config/scripts/rotate-monitor.sh;
+      executable = true;
+    };
     "startup.sh" = {
-      source = ../config/startup.sh;     
+      source = ../config/scripts/startup.sh;
       executable = true;
     };
   };

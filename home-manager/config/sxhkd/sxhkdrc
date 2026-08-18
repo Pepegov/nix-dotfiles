@@ -73,7 +73,11 @@ super + g
 	bspc node -s biggest.window
 # Перезапустить конфигурационные файлы sxhkd 
 super + Escape
-	pkill -USR1 -x sxhkd	
+	pkill -USR1 -x sxhkd
+
+# Переключение ориентации внешнего монитора
+super + ctrl + r
+	$HOME/.config/bspwm/rotate-monitor.sh
 	
 ###### СОСТОЯНИЕ\ФЛАГИ ######
 # Установить режим окна

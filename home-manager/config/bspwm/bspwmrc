@@ -53,6 +53,7 @@ bspc rule -a nextcloud desktop='^6'
 bspc rule -a Blueberry.py desktop='^8'
 bspc rule -a nekobox desktop='^8'
 bspc rule -a v2rayN desktop='^8'
+bspc rule -a Throne desktop='^8'
 
 bspc rule -a TelegramDesktop desktop='^9'
 bspc rule -a yandex-music desktop='^9'
@@ -66,4 +67,4 @@ if [ -n "$DISPLAY_EXTERNAL" ]; then
 fi
 
 picom &
-$HOME/.config/startup.sh &
+$HOME/.config/scripts/startup.sh &

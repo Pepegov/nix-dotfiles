@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     v2rayn	
+    neko
     v2ray-geoip          # для geoip.dat
     v2ray-domain-list-community  # для geosite.dat
     xray
