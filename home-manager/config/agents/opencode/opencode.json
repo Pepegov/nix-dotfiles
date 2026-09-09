@@ -21,6 +21,21 @@
       "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
       "enabled": true
     },
+    "figma": {
+      "type": "local",
+      "command": [
+        "bunx",
+        "figma-mcp-server"
+      ]
+    },
+    "avalonia": {
+      "type": "remote",
+      "url": "https://docs-mcp.avaloniaui.net/mcp"
+    },
+    "rider": {
+      "type": "remote",
+      "url": "http://127.0.0.1:64342/stream"
+    }
   },
   "provider": {
     "lmstudio": {

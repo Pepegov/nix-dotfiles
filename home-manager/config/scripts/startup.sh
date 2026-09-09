@@ -9,4 +9,5 @@ blueberry &
 nextcloud &
 obsidian &
 Telegram &
+evolution &
 #kdeconnect-indicator &

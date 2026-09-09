@@ -22,7 +22,17 @@
   };
 
   home.file.".config/opencode" = {
-    source = ../config/opencode;
+    source = ../config/agents/opencode;
+    recursive = true;
+  };
+
+  home.file.".codex" = {
+    source = ../config/agents/codex;
+    recursive = true;
+  };
+
+  home.file.".agents/skills" = {
+    source = ../config/agents/common/skills;
     recursive = true;
   };
 
@@ -36,4 +46,6 @@
       executable = true;
     };
   };
+
+  xdg.configFile."environment.d/env.conf".source = "${config.home.homeDirectory}/nix/hidden/enviroment.conf";
 }

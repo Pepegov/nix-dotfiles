@@ -21,8 +21,6 @@ let
 in
 {
   home.packages =
-    (mkRider "Blazor" "blazor")
-    ++ (mkRider "Avalonia" "avalonia")
-    ++ (mkRider "Work" "work");
+    mkRider "Dotnet" "dotnet";
     # ++ (mkRider "Razor" "razor");
 }

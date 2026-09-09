@@ -8,9 +8,9 @@ sudo nixos-rebuild switch --flake ~/nix --impure
 
 Update home-manager
 ```bash
-home-manager switch --flake ~/nix
+home-manager switch --flake ~/nix --impure
 ```
 or
 ```bash
-home-manager switch --flake ~/nix#username
+home-manager switch --flake ~/nix#username --impure
 ```
