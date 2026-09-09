@@ -1,7 +1,5 @@
-{ pkgs }:
+{ pkgs, pkgs-unstable }:
 
 {
-  avalonia = import ./avalonia.nix { inherit pkgs; };
-  blazor   = import ./blazor.nix   { inherit pkgs; };
-  work     = import ./work.nix     { inherit pkgs; };
+  dotnet = import ./dotnet.nix { inherit pkgs pkgs-unstable; };
 }
