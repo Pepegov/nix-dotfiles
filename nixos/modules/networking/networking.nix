@@ -33,6 +33,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  services.resolved.enable = true;
   networking.hostName = "pepegov"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

@@ -33,12 +33,22 @@ in
 
   networking.extraHosts = ''
     # Work (infra VPN)
-    10.0.31.40  gitlab-runner
-    10.0.31.37  management-center
-    10.0.31.38  resources
-    10.0.31.31  linux-agents
-    10.0.31.54  windows-agents
-    10.0.31.30  gitlab.lab
+    192.168.254.40  gitlab-runner
+    192.168.254.37  management-center
+    192.168.254.38  resources
+    192.168.254.31  linux-agents
+    192.168.254.54  windows-agents
+    192.168.254.30  gitlab.lab
+
+    192.168.254.38  resources.umbr.infra
+    192.168.254.38  files.umbr.infra
+    192.168.254.38  db-adminer.umbr.infra
+    192.168.254.38  management-center-auth.umbr.infra
+    192.168.254.37  management-center.umbr.infra
+    192.168.254.37  management-center-test.umbr.infra
+    192.168.254.37  management-center-test-api.umbr.infra
+    192.168.254.37  management-center-stable.umbr.infra
+    192.168.254.37  management-center-stable-api.umbr.infra
 
     # Work (main VPN)
     192.168.117.1 gitlab.umbrella.moscow
@@ -72,7 +82,14 @@ in
   };
 
   systemd.services.openvpn-work-infra = {
-    postStart = "${pkgs.iproute2}/bin/ip rule add to 10.0.31.0/24 lookup main priority 92 2>/dev/null || true";
-    preStop = "${pkgs.iproute2}/bin/ip rule del to 10.0.31.0/24 lookup main priority 92 2>/dev/null || true";
+    postStart = ''
+      ${pkgs.iproute2}/bin/ip rule add to 192.168.254.0/24 lookup main priority 92 2>/dev/null || true
+      ${pkgs.systemd}/bin/resolvectl dns tun_work_infra 192.168.254.100 || true
+      ${pkgs.systemd}/bin/resolvectl domain tun_work_infra '~umbr.infra' || true
+    '';
+    preStop = ''
+      ${pkgs.iproute2}/bin/ip rule del to 192.168.254.0/24 lookup main priority 92 2>/dev/null || true
+      ${pkgs.systemd}/bin/resolvectl revert tun_work_infra || true
+    '';
   };
 }
