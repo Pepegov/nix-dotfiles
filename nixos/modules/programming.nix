@@ -79,6 +79,7 @@ in
     pnpm
     nodejs_24
     nodePackages.typescript
+    bun
 
     # arduino
     arduino

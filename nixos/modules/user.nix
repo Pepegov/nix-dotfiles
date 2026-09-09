@@ -5,7 +5,7 @@
   users.users.pepegov = {
     isNormalUser = true;
     description = "Pepegov";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" "tun" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "input" "tun" "lpadmin" ];
     packages = with pkgs; [
     #  thunderbird
     ];

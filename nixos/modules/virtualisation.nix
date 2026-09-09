@@ -10,6 +10,7 @@
     environment.systemPackages = with pkgs; [
         wineWow64Packages.stable
         winetricks
+        #dtop
     ];
     hardware.graphics.enable32Bit = true;
 
@@ -24,4 +25,8 @@
 
     # Optional: Add your user to the "docker" group to run docker without sudo
     users.users.pepegov.extraGroups = [ "docker" "libvirtd" "kvm" ];
+
+    networking.extraHosts = ''
+        192.168.122.141 umbrella_stand.local
+    '';
 }

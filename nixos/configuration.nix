@@ -19,6 +19,8 @@
       ./modules/user.nix
       ./modules/mount.nix
       ./modules/magicmouse.nix
+      ./modules/printing.nix
+      ./modules/garbage-collector.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -97,14 +99,17 @@
     pciutils #for lspci
     git
     pass
-    htop
     killall
     ffmpeg
     usbutils
     openssl
     
+    htop
+    btop
+
     #ai
     openai-whisper
+    pkgs-unstable.codex
     
     mesa-demos
     zip
@@ -136,7 +141,7 @@
     bind #nslookup
     obs-studio
     telegram-desktop 
-    obsidian 
+    pkgs-unstable.obsidian 
     nextcloud-client
     qbittorrent
     blueman
@@ -150,7 +155,17 @@
     #phone
     android-file-transfer
     jmtpfs
+
+    
   ];
+
+  #email
+  programs.evolution = {
+    enable = true;
+    plugins = with pkgs; [
+      evolution-ews
+    ];
+  };
 
   services.gvfs.enable = true; #phone
 

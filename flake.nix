@@ -61,6 +61,6 @@
       modules = [ ./home-manager/home.nix ];
     };
 
-    devShells.${system} = import ./shells { inherit pkgs; };
+    devShells.${system} = import ./shells { inherit pkgs pkgs-unstable; };
   };
 }

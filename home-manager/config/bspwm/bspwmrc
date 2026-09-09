@@ -57,6 +57,7 @@ bspc rule -a Throne desktop='^8'
 
 bspc rule -a TelegramDesktop desktop='^9'
 bspc rule -a yandex-music desktop='^9'
+bspc rule -a evolution desktop='^9'
 
 bspc rule -a qutebrowser desktop='^10'
 bspc rule -a firefox desktop='^10'
@@ -66,5 +67,5 @@ if [ -n "$DISPLAY_EXTERNAL" ]; then
 	$HOME/.config/polybar/launch_additional.sh
 fi
 
+$HOME/.config/startup.sh &
 picom &
-$HOME/.config/scripts/startup.sh &
