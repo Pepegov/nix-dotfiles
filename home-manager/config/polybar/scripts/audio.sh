@@ -24,8 +24,8 @@ fi
 mic_muted=$(pamixer --default-source --get-mute)
 
 if [ "$mic_muted" = "true" ]; then
-    # Микрофон отключен - красным цветом (формат Polybar)
-    microphone="%{F#ff0000}%{F-}"
+    # Микрофон отключен - цвет ошибки из общей палитры Polybar
+    microphone="%{F#C17C5D}%{F-}"
 else
     # Микрофон включен
     microphone=""

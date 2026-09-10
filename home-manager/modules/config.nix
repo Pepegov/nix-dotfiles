@@ -37,12 +37,22 @@
   };
 
   xdg.configFile = {
+    "alacritty/alacritty.toml" = {
+      source = ../config/alacritty/alacritty.toml;
+      force = true;
+    };
+    "rofi/config.rasi".source = ../config/rofi/config.rasi;
+    "rofi/theme.rasi".source = ../config/rofi/theme.rasi;
     "bspwm/rotate-monitor.sh" = {
       source = ../config/scripts/rotate-monitor.sh;
       executable = true;
     };
     "startup.sh" = {
       source = ../config/scripts/startup.sh;
+      executable = true;
+    };
+    "wallpaper-rotate.sh" = {
+      source = ../config/scripts/wallpaper-rotate.sh;
       executable = true;
     };
   };

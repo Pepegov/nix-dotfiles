@@ -6,17 +6,17 @@ YOFFSET=0
 XOFFSET=0
 WIDTH=12
 WIDTH_WIDE=24
-THEME=solarized
+THEME="$HOME/.config/rofi/theme.rasi"
 
 # Color Settings of Icon shown in Polybar
-COLOR_DISCONNECTED='#000'       # Device Disconnected
-COLOR_NEWDEVICE='#ff0'          # New Device
-COLOR_BATTERY_90='#fff'         # Battery >= 90
-COLOR_BATTERY_80='#ccc'         # Battery >= 80
-COLOR_BATTERY_70='#aaa'         # Battery >= 70
-COLOR_BATTERY_60='#888'         # Battery >= 60
-COLOR_BATTERY_50='#666'         # Battery >= 50
-COLOR_BATTERY_LOW='#f00'        # Battery <  50
+COLOR_DISCONNECTED='#817361'    # Device disconnected
+COLOR_NEWDEVICE='#D2B77C'       # New device
+COLOR_BATTERY_90='#8EA06B'      # Battery >= 90
+COLOR_BATTERY_80='#F0E6D2'      # Battery >= 80
+COLOR_BATTERY_70='#E4D1A6'      # Battery >= 70
+COLOR_BATTERY_60='#B29570'      # Battery >= 60
+COLOR_BATTERY_50='#A99A7C'      # Battery >= 50
+COLOR_BATTERY_LOW='#C17C5D'     # Battery < 50
 
 # Icons shown in Polybar (будут отображаться шрифтом JetBrainsMono Nerd Font)
 ICON_SMARTPHONE=''   # nf-fa-mobile

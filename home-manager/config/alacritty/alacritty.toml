@@ -1,0 +1,62 @@
+[window]
+decorations = "None"
+opacity = 1.0
+
+[window.padding]
+x = 14
+y = 12
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[keyboard]
+bindings = [
+  { key = "С", mods = "Control|Shift", action = "Copy", mode = "~Vi" },
+  { key = "М", mods = "Control|Shift", action = "Paste", mode = "~Vi" },
+]
+
+[colors.primary]
+background = "#0D0C07"
+foreground = "#E4D1A6"
+bright_foreground = "#F0E6D2"
+dim_foreground = "#A99A7C"
+
+[colors.cursor]
+cursor = "#D2B77C"
+text = "#0D0C07"
+
+[colors.selection]
+text = "#0D0C07"
+background = "#D2B77C"
+
+[colors.normal]
+black = "#0D0C07"
+red = "#C17C5D"
+green = "#8EA06B"
+yellow = "#D2B77C"
+blue = "#B29570"
+magenta = "#39462B"
+cyan = "#2B452F"
+white = "#E4D1A6"
+
+[colors.bright]
+black = "#817361"
+red = "#C17C5D"
+green = "#8EA06B"
+yellow = "#D2B77C"
+blue = "#B29570"
+magenta = "#39462B"
+cyan = "#2B452F"
+white = "#F0E6D2"
+
+[colors.footer_bar]
+background = "#203828"
+foreground = "#E4D1A6"

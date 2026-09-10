@@ -3,6 +3,7 @@
     	#	./modules/plasma-mime.nix
 			./modules/nix-shell.nix
 			./modules/git.nix
+			./modules/theme.nix
 			./modules/config.nix
 			#./modules/vscode.nix
 			./modules/apps.nix
@@ -16,10 +17,15 @@
 		# only for current user
 		packages = with pkgs; [
 			neofetch
+			feh
 		];
 	};
 
 	home.file."Pictures/Screenshots/.keep".text = "";
+	home.file."Pictures/Wallpapers" = {
+		source = ./images/desktop;
+		recursive = true;
+	};
 
 	programs.bash = {
 		enable = true;

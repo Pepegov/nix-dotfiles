@@ -9,7 +9,7 @@ super + shift + b
 	firefox
 # Лаунчер
 super + @space
-	rofi -show drun
+	rofi -show drun -theme "$HOME/.config/rofi/theme.rasi"
 # Базовый бар
 super + F1
 	$HOME/.config/polybar/launch.sh	

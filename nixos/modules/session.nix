@@ -17,9 +17,37 @@
         desktopManager.budgie.enable = true;
         # Configure bspwm
         windowManager.bspwm.enable = true;
-        # Configure lightdm
-        displayManager.lightdm.enable = true;
-        #displayManager.lightdm.greeters.gtk.enable = true;
+        # LightDM is also used by light-locker for the lock screen.
+        displayManager.lightdm = {
+            enable = true;
+            background = ../../home-manager/images/background_lightdm.png;
+            extraSeatDefaults = "user-session=none+bspwm";
+
+            greeters = {
+                # Budgie enables Slick by default, so configure that greeter
+                # instead of competing with it for the LightDM session.
+                gtk.enable = false;
+                slick = {
+                    enable = true;
+                    theme = {
+                        package = pkgs.gnome-themes-extra;
+                        name = "Adwaita-dark";
+                    };
+                    iconTheme = {
+                        package = pkgs.adwaita-icon-theme;
+                        name = "Adwaita";
+                    };
+                    cursorTheme = {
+                        package = pkgs.adwaita-icon-theme;
+                        name = "Adwaita";
+                    };
+                    font = {
+                        package = pkgs.noto-fonts;
+                        name = "Noto Sans 11";
+                    };
+                };
+            };
+        };
     };
     services.displayManager.defaultSession = "none+bspwm";
 

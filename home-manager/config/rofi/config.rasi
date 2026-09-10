@@ -1,0 +1,23 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+
+    display-drun: "Apps";
+    display-run: "Run";
+    display-window: "Windows";
+
+    drun-display-format: "{name}";
+    icon-theme: "Papirus-Dark";
+
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+
+    case-sensitive: false;
+    cycle: true;
+    hover-select: false;
+
+    terminal: "alacritty";
+}
+
+@theme "theme.rasi"

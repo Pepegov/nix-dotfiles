@@ -1,0 +1,128 @@
+* {
+    bg:           #0D0C07;
+    surface:      #17271C;
+    surface-alt:  #203828;
+    selected:     #39462B;
+
+    fg:           #E4D1A6;
+    fg-bright:    #F0E6D2;
+    fg-muted:     #A99A7C;
+    accent:       #D2B77C;
+
+    background-color: transparent;
+    text-color: @fg;
+
+    font: "JetBrainsMono Nerd Font 13";
+}
+
+window {
+    width: 620px;
+    padding: 18px;
+
+    background-color: @surface;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 14px;
+}
+
+mainbox {
+    spacing: 14px;
+    background-color: transparent;
+}
+
+inputbar {
+    padding: 11px 14px;
+    spacing: 10px;
+
+    background-color: @bg;
+    border: 1px;
+    border-color: @surface-alt;
+    border-radius: 9px;
+
+    children: [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @accent;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg-bright;
+
+    placeholder: "Поиск приложений...";
+    placeholder-color: @fg-muted;
+}
+
+message {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: @bg;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+listview {
+    lines: 7;
+    columns: 1;
+    spacing: 5px;
+
+    fixed-height: false;
+    scrollbar: false;
+    background-color: transparent;
+}
+
+element {
+    padding: 9px 11px;
+    spacing: 12px;
+
+    background-color: transparent;
+    text-color: @fg-muted;
+    border-radius: 8px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-muted;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-muted;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @fg-bright;
+}
+
+element-icon {
+    size: 26px;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    text-color: inherit;
+}
+
+mode-switcher {
+    spacing: 6px;
+}
+
+button {
+    padding: 7px;
+    border-radius: 7px;
+    background-color: @bg;
+    text-color: @fg-muted;
+}
+
+button selected {
+    background-color: @selected;
+    text-color: @accent;
+}
