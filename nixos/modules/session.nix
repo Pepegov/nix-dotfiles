@@ -17,17 +17,16 @@
         desktopManager.budgie.enable = true;
         # Configure bspwm
         windowManager.bspwm.enable = true;
-        # LightDM is also used by light-locker for the lock screen.
+        # Slick greeter rejects NixOS session names such as `none+bspwm` and
+        # falls back to another desktop.  The GTK greeter uses LightDM's
+        # session hint directly, so it honors `defaultSession` below.
         displayManager.lightdm = {
             enable = true;
             background = ../../home-manager/images/background_lightdm.png;
-            extraSeatDefaults = "user-session=none+bspwm";
 
             greeters = {
-                # Budgie enables Slick by default, so configure that greeter
-                # instead of competing with it for the LightDM session.
-                gtk.enable = false;
-                slick = {
+                slick.enable = false;
+                gtk = {
                     enable = true;
                     theme = {
                         package = pkgs.gnome-themes-extra;
@@ -40,11 +39,12 @@
                     cursorTheme = {
                         package = pkgs.adwaita-icon-theme;
                         name = "Adwaita";
+                        size = 24;
                     };
-                    font = {
-                        package = pkgs.noto-fonts;
-                        name = "Noto Sans 11";
-                    };
+                    extraConfig = ''
+                        user-background = false
+                        transition-type = none
+                    '';
                 };
             };
         };
