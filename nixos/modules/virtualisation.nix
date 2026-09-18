@@ -11,6 +11,7 @@
         wineWow64Packages.stable
         winetricks
         #dtop
+        spice-gtk
     ];
     hardware.graphics.enable32Bit = true;
 
