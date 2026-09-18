@@ -26,10 +26,14 @@
     recursive = true;
   };
 
+  home.file.".config/opencode/AGENTS.md".source = ../config/agents/common/AGENTS.md;
+
   home.file.".codex" = {
     source = ../config/agents/codex;
     recursive = true;
   };
+
+  home.file.".codex/AGENTS.md".source = ../config/agents/common/AGENTS.md;
 
   home.file.".agents/skills" = {
     source = ../config/agents/common/skills;

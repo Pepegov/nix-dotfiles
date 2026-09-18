@@ -4,14 +4,15 @@ personality = "pragmatic"
 
 [projects."/home/pepegov"]
 trust_level = "untrusted"
-
 [projects."/home/pepegov/nix"]
 trust_level = "trusted"
-
 [projects."/home/pepegov/repositoryes/GITHUB/TodoCalendar"]
 trust_level = "trusted"
-
 [projects."/home/pepegov/repositoryes/Umbrella/management-center"]
+trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/GITHUB/Template.Net.Monolith.Modular"]
+trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/Private_GitHub/NFCPOS"]
 trust_level = "trusted"
 
 [mcp_servers.browsermcp]
@@ -45,5 +46,5 @@ url = "https://docs-mcp.avaloniaui.net/mcp"
 enabled = true
 
 [mcp_servers.rider]
-url = "http://127.0.0.1:64342/stream"
+url = "http://127.0.0.1:64482/stream"
 enabled = true
