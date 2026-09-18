@@ -47,8 +47,8 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     dotnet
     bashInteractive
-    bun
-    nodejs_20
+    pkgs-unstable.bun
+    pkgs-unstable.nodejs
     git
     pkg-config
     nix-ld
