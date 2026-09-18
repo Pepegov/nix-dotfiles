@@ -71,9 +71,6 @@
             boot.initrd.kernelModules = [
                 "tun"
                 "amdgpu"
-                "nvidia"
-                "nvidia_modeset"
-                "nvidia_drm"
             ];
             
             system.nixos.tags = [ "nvidia-sync" ];
