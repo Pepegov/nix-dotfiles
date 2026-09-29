@@ -5,6 +5,7 @@
 			./modules/git.nix
 			./modules/theme.nix
 			./modules/config.nix
+			./modules/night-mode.nix
 			#./modules/vscode.nix
 			./modules/apps.nix
   	];
@@ -20,7 +21,6 @@
 			feh
 		];
 	};
-
 	home.file."Pictures/Screenshots/.keep".text = "";
 	home.file."Pictures/Wallpapers" = {
 		source = ./images/desktop;

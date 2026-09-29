@@ -12,6 +12,7 @@ case "$CURRENT" in
 esac
 
 xrandr --output "$FOCUSED" --rotate "$NEW"
+systemctl --user start night-mode-sync.service
 
 if [ "$FOCUSED" = "$DISPLAY_EXTERNAL" ]; then
     bspc monitor "$DISPLAY_EXTERNAL" -d I II III IV V VI VII VIII
