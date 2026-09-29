@@ -36,14 +36,27 @@
     
     # Изображения - Viewnior
     "image/jpeg" = "viewnior.desktop";
+    "image/jpg" = "viewnior.desktop";
+    "image/pjpeg" = "viewnior.desktop";
     "image/png" = "viewnior.desktop";
     "image/gif" = "viewnior.desktop";
     "image/bmp" = "viewnior.desktop";
-    "image/webp" = "viewnior.desktop";
     "image/tiff" = "viewnior.desktop";
     "image/svg+xml" = "viewnior.desktop";
-    "image/x-xcf" = "viewnior.desktop";
+    "image/svg+xml-compressed" = "viewnior.desktop";
+    "image/vnd.wap.wbmp" = "viewnior.desktop";
+    "image/x-bmp" = "viewnior.desktop";
+    "image/x-gray" = "viewnior.desktop";
+    "image/x-icb" = "viewnior.desktop";
     "image/x-ico" = "viewnior.desktop";
+    "image/x-png" = "viewnior.desktop";
+    "image/x-portable-anymap" = "viewnior.desktop";
+    "image/x-portable-bitmap" = "viewnior.desktop";
+    "image/x-portable-graymap" = "viewnior.desktop";
+    "image/x-portable-pixmap" = "viewnior.desktop";
+    "image/x-xbitmap" = "viewnior.desktop";
+    "image/x-xpixmap" = "viewnior.desktop";
+    "image/x-pcx" = "viewnior.desktop";
     
     # PDF - браузер (Firefox/Chromium)
     "application/pdf" = [

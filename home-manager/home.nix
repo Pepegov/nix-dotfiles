@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 	imports = [
-    	#	./modules/plasma-mime.nix
+			./modules/plasma-mime.nix
 			./modules/nix-shell.nix
 			./modules/git.nix
 			./modules/theme.nix
