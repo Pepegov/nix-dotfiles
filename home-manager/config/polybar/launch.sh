@@ -12,5 +12,5 @@ for monitor in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 done
 
 if [ -n "$DISPLAY_EXTERNAL" ]; then
-	$HOME/.config/polybar/launch_additional.sh
+	$HOME/.config/polybar/launch_additional.sh &
 fi

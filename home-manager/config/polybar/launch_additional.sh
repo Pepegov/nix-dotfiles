@@ -1,5 +1,5 @@
 #!/bin/sh
 
 #killall -q polybar
-echo "---" | tee -a /tmp/polybar_additional.log
-polybar additional >>/tmp/polybar_additional.log
+echo "---" >>/tmp/polybar_additional.log
+polybar additional >>/tmp/polybar_additional.log 2>&1
