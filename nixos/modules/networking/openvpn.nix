@@ -40,15 +40,15 @@ in
     192.168.254.54  windows-agents
     192.168.254.30  gitlab.lab
 
-    192.168.254.38  resources.umbr.infra
-    192.168.254.38  files.umbr.infra
-    192.168.254.38  db-adminer.umbr.infra
-    192.168.254.38  management-center-auth.umbr.infra
-    192.168.254.37  management-center.umbr.infra
-    192.168.254.37  management-center-test.umbr.infra
-    192.168.254.37  management-center-test-api.umbr.infra
-    192.168.254.37  management-center-stable.umbr.infra
-    192.168.254.37  management-center-stable-api.umbr.infra
+    # 192.168.254.38  resources.umbr.infra
+    # 192.168.254.38  files.umbr.infra
+    # 192.168.254.38  db-adminer.umbr.infra
+    # 192.168.254.38  management-center-auth.umbr.infra
+    # 192.168.254.37  management-center.umbr.infra
+    # 192.168.254.37  management-center-test.umbr.infra
+    # 192.168.254.37  management-center-test-api.umbr.infra
+    # 192.168.254.37  management-center-stable.umbr.infra
+    # 192.168.254.37  management-center-stable-api.umbr.infra
 
     # Work (main VPN)
     192.168.117.1 gitlab.umbrella.moscow
