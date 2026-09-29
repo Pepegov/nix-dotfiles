@@ -6,13 +6,16 @@ personality = "pragmatic"
 trust_level = "untrusted"
 [projects."/home/pepegov/nix"]
 trust_level = "trusted"
-[projects."/home/pepegov/repositoryes/GITHUB/TodoCalendar"]
+[projects."/home/pepegov/repositoryes/Private_GitHub/CalendarFlow"]
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Umbrella/management-center"]
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/GITHUB/Template.Net.Monolith.Modular"]
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Private_GitHub/NFCPOS"]
+trust_level = "trusted"
+model_reasoning_effort = "high"
+[projects."/home/pepegov/repositoryes/Private_GitHub/nixos_crypto"]
 trust_level = "trusted"
 
 [mcp_servers.browsermcp]
@@ -28,6 +31,11 @@ enabled = true
 [mcp_servers.dotnet]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-dotnet"]
+enabled = true
+
+[mcp_servers.arduino]
+command = "npx"
+args = ["-y", "arduino-mcp-server"]
 enabled = true
 
 [mcp_servers.github]

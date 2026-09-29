@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 let
   dotnet = pkgs.dotnetCorePackages.combinePackages [
@@ -32,6 +32,7 @@ in
     # Ai tools
     pkgs-unstable.code-cursor
     opencode
+    inputs.openspec.packages.${pkgs.system}.default
     lmstudio
 
     # .net
@@ -101,6 +102,7 @@ in
     direnv
     go
     p11-kit
+    gcr
     
     postgresql
     mariadb

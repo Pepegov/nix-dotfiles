@@ -16,6 +16,11 @@
       "command": ["npx","-y","@modelcontextprotocol/server-dotnet"],
       "enabled": true
     },
+    "arduino": {
+      "type": "local",
+      "command": ["npx", "-y", "arduino-mcp-server"],
+      "enabled": true
+    },
     "github": {
       "type": "local",
       "command": ["npx", "-y", "@modelcontextprotocol/server-github"],

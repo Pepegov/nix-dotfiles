@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    openspec.url = "github:Fission-AI/OpenSpec";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
