@@ -2,6 +2,12 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# Make the X11 session available to user services, then immediately apply the
+# appropriate display color temperature after logging in.
+export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
+dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+systemctl --user start night-mode-sync.service
+
 # Привязка рабочих столов к монитору(ам) -d
 if [ -n "$DISPLAY_EXTERNAL" ]; then
     xrandr --output "$DISPLAY_EXTERNAL" --auto --left-of "$DISPLAY_INTERNAL" --output "$DISPLAY_EXTERNAL" --primary
@@ -65,9 +71,7 @@ bspc rule -a qutebrowser desktop='^10'
 bspc rule -a firefox desktop='^10'
 
 $HOME/.config/polybar/launch.sh
-if [ -n "$DISPLAY_EXTERNAL" ]; then
-	$HOME/.config/polybar/launch_additional.sh
-fi
 
 $HOME/.config/startup.sh &
+
 picom &

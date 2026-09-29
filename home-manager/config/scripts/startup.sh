@@ -7,7 +7,7 @@ alacritty &
 Throne &
 blueberry &
 nextcloud &
-obsidian &
+(sleep 3; obsidian) &
 Telegram &
 evolution &
 #kdeconnect-indicator &

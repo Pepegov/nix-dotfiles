@@ -21,6 +21,8 @@
         qemu.runAsRoot = false;
         onBoot = "start";
     };
+    virtualisation.spiceUSBRedirection.enable = true;
+
     programs.virt-manager.enable = true;
     networking.firewall.trustedInterfaces = [ "virbr0" ];
 

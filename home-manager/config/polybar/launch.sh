@@ -10,3 +10,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 for monitor in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     MONITOR=$monitor polybar --reload base &
 done
+
+if [ -n "$DISPLAY_EXTERNAL" ]; then
+	$HOME/.config/polybar/launch_additional.sh
+fi
