@@ -1,13 +1,20 @@
 { config, pkgs, ... }: {
 	imports = [
-			./modules/plasma-mime.nix
-			./modules/nix-shell.nix
-			./modules/git.nix
-			./modules/theme.nix
-			./modules/config.nix
-			./modules/night-mode.nix
-			#./modules/vscode.nix
-			./modules/apps.nix
+			./modules/agents
+			./modules/alacritty
+			./modules/apps
+			./modules/bspwm
+			./modules/git
+			./modules/night-mode
+			./modules/nix-shell
+			./modules/picom
+			./modules/plasma-mime
+			./modules/polybar
+			./modules/rofi
+			./modules/rotate-monitor
+			./modules/theme
+			# ./modules/vscode
+			./modules/wallpaper
   	];
 
 	home = {
@@ -22,11 +29,6 @@
 		];
 	};
 	home.file."Pictures/Screenshots/.keep".text = "";
-	home.file."Pictures/Wallpapers" = {
-		source = ./images/desktop;
-		recursive = true;
-	};
-
 	programs.bash = {
 		enable = true;
 		shellAliases = {

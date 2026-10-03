@@ -4,7 +4,7 @@
   home.packages = [ pkgs.redshift ];
 
   xdg.configFile."night-mode.sh" = {
-    source = ../config/scripts/night-mode.sh;
+    source = ./config/night-mode.sh;
     executable = true;
   };
 

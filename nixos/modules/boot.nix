@@ -17,7 +17,7 @@
             grub.device = "nodev";
             grub.useOSProber = true;
             grub.efiSupport = true;
-            grub.splashImage = ../../home-manager/images/background_grub.png;
+            grub.splashImage = ../../home-manager/modules/wallpaper/assets/background_grub.png;
             grub.backgroundColor = "#0D0C07";
             grub.gfxmodeEfi = "auto";
             grub.gfxpayloadEfi = "keep";

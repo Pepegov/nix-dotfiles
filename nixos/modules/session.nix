@@ -22,7 +22,7 @@
         # session hint directly, so it honors `defaultSession` below.
         displayManager.lightdm = {
             enable = true;
-            background = ../../home-manager/images/background_lightdm.png;
+            background = ../../home-manager/modules/wallpaper/assets/background_lightdm.png;
 
             greeters = {
                 slick.enable = false;
