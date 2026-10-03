@@ -31,11 +31,6 @@
                 Option "DRI" "2"
             '';
 
-            boot.kernelParams = [
-                "amdgpu.dcdebugmask=0x10"
-                "nvidia.NVreg_DynamicPowerManagement=0x02"
-                "pcie_aspm=force"
-            ];
             boot.initrd.kernelModules = [
                 "tun"
                 "amdgpu"

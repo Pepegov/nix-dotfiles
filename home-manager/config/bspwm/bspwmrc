@@ -74,4 +74,12 @@ $HOME/.config/polybar/launch.sh &
 
 $HOME/.config/startup.sh &
 
-picom &
+# NVIDIA offload keeps AMD as the display GPU.  Picom's GLX vblank scheduler
+# is unstable with this PRIME configuration, so use Xrender only there.
+if ! pgrep -x picom > /dev/null; then
+    if grep -q '^nvidia-offload-' /run/current-system/nixos-version 2>/dev/null; then
+        picom --config "$HOME/.config/picom/picom-offload.conf" &
+    else
+        picom &
+    fi
+fi
