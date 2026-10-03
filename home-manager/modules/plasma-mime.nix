@@ -3,9 +3,31 @@
 {
   # Включаем поддержку MIME-приложений
   xdg.mimeApps.enable = true;
+
+  # Приложение-терминал для программ, которые поддерживают XDG Terminal Exec,
+  # и для программ, которые используют переменную окружения TERMINAL.
+  xdg.configFile."xdg-terminals.list".text = ''
+    [Default Applications]
+    default=Alacritty.desktop;
+  '';
+  home.sessionVariables.TERMINAL = "alacritty";
   
   # Настройка приложений по умолчанию для разных типов файлов
   xdg.mimeApps.defaultApplications = {
+    # Браузер по умолчанию
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/ftp" = "firefox.desktop";
+    "text/html" = "firefox.desktop";
+    "application/xhtml+xml" = "firefox.desktop";
+
+    # Файловый менеджер по умолчанию
+    "inode/directory" = "org.kde.dolphin.desktop";
+    "x-scheme-handler/file" = "org.kde.dolphin.desktop";
+
+    # Почтовый клиент по умолчанию
+    "x-scheme-handler/mailto" = "org.gnome.Evolution.desktop";
+
     # Текстовые файлы - xed
     "text/plain" = "xed.desktop";
     "text/markdown" = "xed.desktop";
