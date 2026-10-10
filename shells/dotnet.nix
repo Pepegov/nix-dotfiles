@@ -1,18 +1,23 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs-unstable, ... }:
 
 let
-  dotnet = pkgs-unstable.dotnetCorePackages.combinePackages [
-    pkgs-unstable.dotnetCorePackages.sdk_8_0
-    pkgs-unstable.dotnetCorePackages.sdk_9_0
-    pkgs-unstable.dotnetCorePackages.sdk_10_0
+  dotnetPkgs = pkgs-unstable;
 
-    pkgs-unstable.dotnetCorePackages.aspnetcore_9_0
-    pkgs-unstable.dotnetCorePackages.runtime_9_0
-    pkgs-unstable.dotnetCorePackages.aspnetcore_10_0
-    pkgs-unstable.dotnetCorePackages.runtime_10_0
+  dotnet = dotnetPkgs.dotnetCorePackages.combinePackages [
+    dotnetPkgs.dotnetCorePackages.sdk_8_0
+    dotnetPkgs.dotnetCorePackages.sdk_9_0
+    dotnetPkgs.dotnetCorePackages.sdk_10_0
+
+    dotnetPkgs.dotnetCorePackages.aspnetcore_9_0
+    dotnetPkgs.dotnetCorePackages.runtime_9_0
+    dotnetPkgs.dotnetCorePackages.aspnetcore_10_0
+    dotnetPkgs.dotnetCorePackages.runtime_10_0
   ];
 
-  guiDeps = with pkgs; [
+  # Keep every native library on the same nixpkgs revision as .NET. The SDK
+  # itself resolves glibc through its RUNPATH, so glibc must not be added to
+  # LD_LIBRARY_PATH: doing so breaks already-running programs such as Rider.
+  guiDeps = with dotnetPkgs; [
     fontconfig
     freetype
     xorg.libX11
@@ -29,7 +34,7 @@ let
     wayland
   ];
 
-  runtimeDeps = with pkgs; [
+  runtimeDeps = with dotnetPkgs; [
     stdenv.cc.cc
     zlib
     openssl
@@ -43,12 +48,12 @@ let
   libraryDeps = guiDeps ++ runtimeDeps;
 in
 
-pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [
+dotnetPkgs.mkShell {
+  nativeBuildInputs = with dotnetPkgs; [
     dotnet
     bashInteractive
-    pkgs-unstable.bun
-    pkgs-unstable.nodejs
+    bun
+    nodejs
     git
     pkg-config
     nix-ld
@@ -62,10 +67,12 @@ pkgs.mkShell {
 
     export DOTNET_ROOT=${dotnet}
     export PATH=$DOTNET_ROOT/bin:$PATH
-    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath libraryDeps}:$LD_LIBRARY_PATH"
+    # Do not inherit LD_LIBRARY_PATH: it can contain a glibc from another
+    # nixpkgs revision and override the glibc required by libcoreclr.so.
+    export LD_LIBRARY_PATH="${dotnetPkgs.lib.makeLibraryPath libraryDeps}"
 
-    export NIX_LD=${pkgs.stdenv.cc.bintools.dynamicLinker}
-    export NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath runtimeDeps}
+    export NIX_LD=${dotnetPkgs.stdenv.cc.bintools.dynamicLinker}
+    export NIX_LD_LIBRARY_PATH=${dotnetPkgs.lib.makeLibraryPath runtimeDeps}
 
     export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
     export DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0

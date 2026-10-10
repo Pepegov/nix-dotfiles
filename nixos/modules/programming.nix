@@ -24,7 +24,7 @@ in
   environment.systemPackages = with pkgs; [
     # ui
     mongodb-compass
-    pkgs-unstable.jetbrains.rider
+    jetbrains.rider
     jetbrains.datagrip
     postman
     vscode
@@ -112,6 +112,6 @@ in
   services.mysql.enable = false;
 
   security.pki.certificates = [
-    (builtins.readFile /home/pepegov/nix/hidden/ca.crt)
+    (builtins.readFile /home/pepegov/nix/hidden/local_ca.crt)
   ];
 }
