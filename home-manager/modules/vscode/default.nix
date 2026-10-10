@@ -1,10 +1,10 @@
 { inputs, config, pkgs, ... }:
 
 let
-  vscode-ext = inputs.vscode-extensions.extensions.${pkgs.system}.vscode-marketplace;
+  vscode-ext = pkgs.vscode-marketplace;
 in
 {
-  nixpkgs.config.allowUnfree = true;   #
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     jetbrains-mono
@@ -13,6 +13,7 @@ in
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
+    mutableExtensionsDir = false;
 
     profiles.default = {
       extensions = with vscode-ext; [
@@ -47,7 +48,9 @@ in
       "workbench.iconTheme" = "vs-seti";
 
       # ---------- UI (Rider style) ----------
-      "workbench.activityBar.location" = "left";
+      "workbench.activityBar.location" = "default";
+      "workbench.activityBar.compact" = true;
+      "workbench.activityBar.iconClickBehavior" = "focus";
       "workbench.sideBar.location" = "left";
       "workbench.statusBar.visible" = true;
 
@@ -90,13 +93,23 @@ in
     keybindings = [
       # ---------- Navigation ----------
       { key = "ctrl+n"; command = "workbench.action.quickOpen"; }
-      { key = "shift+shift"; command = "workbench.action.quickOpen"; }
 
       # Go to file (Rider-style)
       { key = "ctrl+shift+n"; command = "workbench.action.quickOpen"; }
 
       # Search everywhere
       { key = "ctrl+shift+a"; command = "workbench.action.showCommands"; }
+
+      # Search in the contents of all workspace files.
+      { key = "shift shift"; command = "workbench.action.findInFiles"; }
+
+      # Insert a line break in the terminal without running the command.
+      {
+        key = "shift+enter";
+        command = "workbench.action.terminal.sendSequence";
+        args.text = builtins.fromJSON ''"\u0016\u000a"'';
+        when = "terminalFocus";
+      }
 
       # ---------- Refactoring ----------
       { key = "ctrl+alt+shift+t"; command = "editor.action.refactor"; }

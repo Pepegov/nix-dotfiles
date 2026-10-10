@@ -4,6 +4,7 @@
 			./modules/alacritty
 			./modules/apps
 			./modules/bspwm
+			./modules/delayed-shutdown
 			./modules/git
 			./modules/night-mode
 			./modules/nix-shell
@@ -13,7 +14,7 @@
 			./modules/rofi
 			./modules/rotate-monitor
 			./modules/theme
-			# ./modules/vscode
+			./modules/vscode
 			./modules/wallpaper
   	];
 

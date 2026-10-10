@@ -31,6 +31,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [ vscode-extensions.overlays.default ];
     };
 
     pkgs-unstable = import nixpkgs-unstable {

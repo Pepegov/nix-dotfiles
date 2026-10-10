@@ -78,6 +78,10 @@ super + Escape
 # Переключение ориентации внешнего монитора
 super + ctrl + r
 	$HOME/.config/bspwm/rotate-monitor.sh
+
+# Отложенное выключение
+super + shift + p
+	$HOME/.config/delayed-shutdown/delayed-shutdown.sh menu
 	
 ###### СОСТОЯНИЕ\ФЛАГИ ######
 # Установить режим окна
