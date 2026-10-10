@@ -12,6 +12,7 @@
         winetricks
         #dtop
         spice-gtk
+        remmina
     ];
     hardware.graphics.enable32Bit = true;
 
