@@ -1,14 +1,13 @@
 ---
-
 name: figma-to-avalonia
 description: Production workflow for implementing Figma designs as maintainable Avalonia UI using AXAML, MVVM, existing project resources, Figma MCP, Avalonia Build MCP, and Rider MCP.
 compatibility: opencode
 metadata:
-domain: avalonia-ui
-source: figma
-target: axaml
-architecture: mvvm
-------------------
+  domain: avalonia-ui
+  source: figma
+  target: axaml
+  architecture: mvvm
+---
 
 # Figma → Avalonia
 

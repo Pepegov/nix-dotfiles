@@ -3,6 +3,8 @@
 let
   codexAgents = ./config/codex/agents;
   codexAgentDirectory = "${config.home.homeDirectory}/.codex/agents";
+  codexSkills = ./config/common/skills;
+  codexSkillDirectory = "${config.home.homeDirectory}/.codex/skills";
 in
 {
   home.file.".config/opencode" = {
@@ -40,4 +42,35 @@ in
     source = ./config/common/skills;
     recursive = true;
   };
+
+  # Codex discovers user-installed skills under $CODEX_HOME/skills
+  # (normally ~/.codex/skills). Keep the shared copy above for agents that
+  # use the generic ~/.agents location.
+  home.file.".codex/skills" = {
+    source = codexSkills;
+    recursive = true;
+  };
+
+  # The Codex skill loader ignores symlinked SKILL.md files. Home Manager
+  # deploys `source` entries as symlinks, so replace only these files with
+  # regular copies after it has linked the generation. Do not touch .system,
+  # which is maintained by Codex itself.
+  home.activation.installCodexSkills = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    ${pkgs.coreutils}/bin/rm -f \
+      "${codexSkillDirectory}/figma-design-to-code/SKILL.md" \
+      "${codexSkillDirectory}/figma-to-avalonia/SKILL.md" \
+      "${codexSkillDirectory}/vikunja-gtd-task-creator/SKILL.md"
+
+    ${pkgs.coreutils}/bin/install -m 0644 \
+      "${codexSkills}/figma-design-to-code/SKILL.md" \
+      "${codexSkillDirectory}/figma-design-to-code/"
+
+    ${pkgs.coreutils}/bin/install -m 0644 \
+      "${codexSkills}/figma-to-avalonia/SKILL.md" \
+      "${codexSkillDirectory}/figma-to-avalonia/"
+
+    ${pkgs.coreutils}/bin/install -m 0644 \
+      "${codexSkills}/vikunja-gtd-task-creator/SKILL.md" \
+      "${codexSkillDirectory}/vikunja-gtd-task-creator/"
+  '';
 }
