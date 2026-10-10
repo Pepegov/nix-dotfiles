@@ -10,6 +10,11 @@ super + shift + b
 # Лаунчер
 super + @space
 	rofi -show drun -theme "$HOME/.config/rofi/theme.rasi"
+# Диктовка: удерживать F8, отпустить для распознавания и вставки текста
+F8
+	; $HOME/.nix-profile/bin/dictation start
+@F8
+	$HOME/.nix-profile/bin/dictation stop
 # Базовый бар
 super + F1
 	$HOME/.config/polybar/launch.sh	
