@@ -36,6 +36,11 @@
       "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
       "enabled": true
     },
+    "vikunja": {
+      "type": "local",
+      "command": ["npx", "-y", "@democratize-technology/vikunja-mcp"],
+      "enabled": true
+    },
     "figma": {
       "type": "local",
       "command": [

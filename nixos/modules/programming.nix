@@ -31,7 +31,7 @@ in
   
     # Ai tools
     pkgs-unstable.code-cursor
-    opencode
+    pkgs-unstable.opencode
     inputs.openspec.packages.${pkgs.system}.default
     lmstudio
 

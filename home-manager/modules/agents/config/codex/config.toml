@@ -50,6 +50,11 @@ enabled = true
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-github"]
 enabled = true
+[mcp_servers.vikunja]
+command = "npx"
+args = ["-y", "@democratize-technology/vikunja-mcp"]
+env_vars = ["VIKUNJA_URL", "VIKUNJA_API_TOKEN"]
+enabled = true
 [mcp_servers.avalonia]
 url = "https://docs-mcp.avaloniaui.net/mcp"
 enabled = true

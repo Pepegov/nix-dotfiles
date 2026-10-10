@@ -5,6 +5,7 @@
 			./modules/apps
 			./modules/bspwm
 			./modules/delayed-shutdown
+			./modules/environment
 			./modules/git
 			./modules/night-mode
 			./modules/nix-shell
