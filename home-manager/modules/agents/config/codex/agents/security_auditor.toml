@@ -1,7 +1,7 @@
 name = "security_auditor"
 description = "Use when you need to audit code and designs for OWASP risks, auth flaws, data exposure, and dependency issues."
 model = "gpt-5.6-terra"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["Security Auditor"]
 developer_instructions = """

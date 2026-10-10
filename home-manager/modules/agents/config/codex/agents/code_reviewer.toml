@@ -1,7 +1,7 @@
 name = "code_reviewer"
 description = "Use when you need to review changes for correctness, maintainability, regressions, security risk, and missing tests."
 model = "gpt-5.6-terra"
-model_reasoning_effort = "high"
+model_reasoning_effort = "low"
 sandbox_mode = "read-only"
 nickname_candidates = ["Code Reviewer"]
 developer_instructions = """

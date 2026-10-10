@@ -140,3 +140,8 @@ startup_timeout_sec = 60
 [mcp_servers.rider]
 url = "http://127.0.0.1:64482/stream"
 startup_timeout_sec = 60
+
+[mcp_servers.browsermcp]
+command = "npx"
+args = ["-y", "@browsermcp/mcp@latest"]
+enabled = true

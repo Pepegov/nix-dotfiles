@@ -27,6 +27,8 @@ trust_level = "trusted"
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Private_GitHub/nixos_crypto"]
 trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/Umbrella/ansible"]
+trust_level = "trusted"
 
 [mcp_servers.browsermcp]
 command = "npx"
