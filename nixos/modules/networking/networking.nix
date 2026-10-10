@@ -4,7 +4,6 @@
   imports =
   [
     # Modules
-    ./openvpn.nix
     ./tun.nix
     ./v2rayn.nix
     ./v2raya.nix

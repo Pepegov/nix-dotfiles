@@ -92,4 +92,9 @@ in
       ${pkgs.systemd}/bin/resolvectl revert tun_work_infra || true
     '';
   };
+
+  # Сертификат внутренней сети  
+  security.pki.certificates = [
+    (builtins.readFile /home/pepegov/nix/hidden/work/work_test_stand.crt)
+  ];
 }
