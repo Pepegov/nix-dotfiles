@@ -8,6 +8,7 @@ sandbox_mode = "danger-full-access"
 [features]
 multi_agent = true
 multi_agent_v2 = true
+rmcp_client = true
 
 [agents]
 enabled = true
@@ -17,17 +18,19 @@ max_concurrent_threads_per_session = 4
 trust_level = "untrusted"
 [projects."/home/pepegov/nix"]
 trust_level = "trusted"
-[projects."/home/pepegov/repositoryes/Private_GitHub/CalendarFlow"]
-trust_level = "trusted"
-[projects."/home/pepegov/repositoryes/Umbrella/management-center"]
-trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/GITHUB/Template.Net.Monolith.Modular"]
+trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/Private_GitHub/CalendarFlow"]
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Private_GitHub/NFCPOS"]
 trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Private_GitHub/nixos_crypto"]
 trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/Umbrella/management-center"]
+trust_level = "trusted"
 [projects."/home/pepegov/repositoryes/Umbrella/ansible"]
+trust_level = "trusted"
+[projects."/home/pepegov/repositoryes/Umbrella/usiem-api"]
 trust_level = "trusted"
 
 [mcp_servers.browsermcp]
@@ -36,11 +39,11 @@ args = ["-y", "@browsermcp/mcp@latest"]
 enabled = true
 [mcp_servers.playwright]
 command = "npx"
-args = ["-y", "@playwright/mcp@latest"]
+args = ["-y", "@playwright/mcp@latest", "--executable-path", "/run/current-system/sw/bin/chromium"]
 enabled = true
 [mcp_servers.chrome-devtools]
 command = "npx"
-args = ["-y", "chrome-devtools-mcp@latest"]
+args = ["-y", "chrome-devtools-mcp@latest", "--executablePath", "/run/current-system/sw/bin/chromium"]
 enabled = true
 [mcp_servers.obsidian]
 command = "npx"
@@ -49,6 +52,11 @@ enabled = true
 [mcp_servers.github]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-github"]
+enabled = true
+[mcp_servers.gitlab]
+command = "bash"
+args = ["-lc", "GITLAB_PERMISSION_MODE=modify exec npx -y @zereight/mcp-gitlab@2.3.4"]
+env_vars = ["GITLAB_PERSONAL_ACCESS_TOKEN", "GITLAB_API_URL"]
 enabled = true
 [mcp_servers.vikunja]
 command = "npx"

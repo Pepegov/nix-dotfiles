@@ -36,6 +36,19 @@
       "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
       "enabled": true
     },
+    "gitlab": {
+      "type": "local",
+      "command": [
+        "bash",
+        "-lc",
+        "GITLAB_PERMISSION_MODE=modify exec npx -y @zereight/mcp-gitlab@2.3.4"
+      ],
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{env:GITLAB_PERSONAL_ACCESS_TOKEN}",
+        "GITLAB_API_URL": "{env:GITLAB_API_URL}"
+      },
+      "enabled": true
+    },
     "vikunja": {
       "type": "local",
       "command": ["npx", "-y", "@democratize-technology/vikunja-mcp"],
