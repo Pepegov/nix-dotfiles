@@ -17,7 +17,7 @@ let
   # Keep every native library on the same nixpkgs revision as .NET. The SDK
   # itself resolves glibc through its RUNPATH, so glibc must not be added to
   # LD_LIBRARY_PATH: doing so breaks already-running programs such as Rider.
-  guiDeps = with dotnetPkgs; [
+  riderGuiDeps = with dotnetPkgs; [
     fontconfig
     freetype
     xorg.libX11
@@ -45,7 +45,7 @@ let
     libunwind
   ];
 
-  libraryDeps = guiDeps ++ runtimeDeps;
+  libraryDeps = riderGuiDeps ++ runtimeDeps;
 in
 
 dotnetPkgs.mkShell {
