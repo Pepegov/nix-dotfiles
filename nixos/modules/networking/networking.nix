@@ -36,12 +36,12 @@
   networking.hostName = "pepegov"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.extraHosts = ''
-    # JetBrains
-    77.239.114.0 datalore.jetbrains.com
-    77.239.114.0 plugins.jetbrains.com
-    77.239.114.0 download.jetbrains.com
-    77.239.114.0 api.jetbrains.ai
-    77.239.114.0 account.jetbrains.com
-  '';
+#   networking.extraHosts = ''
+#     # JetBrains
+#     77.239.114.0 datalore.jetbrains.com
+#     77.239.114.0 plugins.jetbrains.com
+#     77.239.114.0 download.jetbrains.com
+#     77.239.114.0 api.jetbrains.ai
+#     77.239.114.0 account.jetbrains.com
+#   '';
 }
