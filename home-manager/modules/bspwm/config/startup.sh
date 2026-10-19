@@ -10,4 +10,4 @@ nextcloud &
 (sleep 3; obsidian) &
 Telegram &
 evolution &
-#kdeconnect-indicator &
+kdeconnect-indicator &
