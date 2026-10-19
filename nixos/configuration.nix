@@ -142,6 +142,7 @@
     bind #nslookup
     obs-studio
     telegram-desktop 
+    ayugram-desktop
     pkgs-unstable.obsidian 
     nextcloud-client
     qbittorrent
