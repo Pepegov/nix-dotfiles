@@ -6,6 +6,7 @@
 			./modules/bspwm
 			./modules/delayed-shutdown
 			./modules/dictation
+			./modules/dunst
 			./modules/environment
 			./modules/git
 			./modules/night-mode
