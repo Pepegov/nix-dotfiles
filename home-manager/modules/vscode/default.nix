@@ -24,6 +24,7 @@ in
         github.vscode-github-actions
         isudox.vscode-jetbrains-keybindings
         jnoortheen.nix-ide
+        miguelasantiestebanaguiar.color-picker-everywhere
         mkhl.direnv
         ms-azuretools.vscode-containers
         ms-python.python
@@ -55,6 +56,7 @@ in
       "workbench.statusBar.visible" = true;
 
       "editor.minimap.enabled" = false;
+      "editor.colorDecorators" = true;
       "editor.renderWhitespace" = "selection";
       "editor.cursorSmoothCaretAnimation" = "on";
 
