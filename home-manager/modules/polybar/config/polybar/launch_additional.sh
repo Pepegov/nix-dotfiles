@@ -1,5 +1,8 @@
 #!/bin/sh
 
-#killall -q polybar
+if [ -z "${DISPLAY_EXTERNAL:-}" ]; then
+    exit 0
+fi
+
 echo "---" >>/tmp/polybar_additional.log
-polybar additional >>/tmp/polybar_additional.log 2>&1
+polybar --reload additional >>/tmp/polybar_additional.log 2>&1
