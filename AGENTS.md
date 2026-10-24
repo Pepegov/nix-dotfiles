@@ -1,3 +1,5 @@
-[Правила для агента](docs/AGENT_RULES.md)
+[Правила для агента](docs/agent_rules.md)
 
-[Архитектура репозитория](docs/ARCHITECTURE.md)
+[Архитектура репозитория](docs/architecture.md)
+
+[Дизайн системы](docs/design.md)
