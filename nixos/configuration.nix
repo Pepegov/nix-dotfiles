@@ -1,8 +1,10 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      inputs.calendarflow.nixosModules.default
+
       ./hardware-configuration.nix
       
       # Modules
@@ -73,6 +75,22 @@
     libuuid
     krb5
     libunwind
+
+    # Avalonia / SkiaSharp native dependencies for locally built .NET apps.
+    fontconfig
+    freetype
+    libx11
+    libxext
+    libxrender
+    libxrandr
+    libxi
+    libxcursor
+    libxfixes
+    libice
+    libsm
+    mesa
+    libGL
+    wayland
   ];
 
   # Install firefox.
@@ -115,6 +133,8 @@
     mesa-demos
     zip
     unzip
+    rar
+    unrar
     kdePackages.ark
     p7zip
     home-manager
@@ -169,6 +189,11 @@
 
   services.gvfs.enable = true; #phone
 
+  programs.calendarflow.enable = true;
+
+  boot.extraModprobeConfig = ''
+    options rtw89_pci disable_clkreq=y disable_aspm_l1=y disable_aspm_l1ss=y
+  '';
 
   system.stateVersion = "25.11"; # Did you read the comment?
 }

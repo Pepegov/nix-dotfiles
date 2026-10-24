@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "calendarflow": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792426658,
+        "narHash": "sha256-99Wfeg+ZHNQvfj0w276iyVGF2yZw9O4vg8bKIAF4LLg=",
+        "path": "/home/pepegov/repositoryes/Private_GitHub/CalendarFlow",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/pepegov/repositoryes/Private_GitHub/CalendarFlow",
+        "type": "path"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -132,6 +149,7 @@
     },
     "root": {
       "inputs": {
+        "calendarflow": "calendarflow",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",

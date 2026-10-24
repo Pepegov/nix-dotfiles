@@ -5,6 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     openspec.url = "github:Fission-AI/OpenSpec";
+    calendarflow = {
+      url = "path:/home/pepegov/repositoryes/Private_GitHub/CalendarFlow";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
