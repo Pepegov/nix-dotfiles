@@ -1,10 +1,17 @@
 { pkgs, ... }:
 
+let
+  night-mode = pkgs.writeShellApplication {
+    name = "night-mode";
+    runtimeInputs = [ pkgs.redshift ];
+    text = builtins.readFile ./config/night-mode.sh;
+  };
+in
 {
   home.packages = [ pkgs.redshift ];
 
   xdg.configFile."night-mode.sh" = {
-    source = ./config/night-mode.sh;
+    source = "${night-mode}/bin/night-mode";
     executable = true;
   };
 
