@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, ... }:
+{ config, pkgs, pkgs-unstable, inputs, lib, ... }:
 
 let
   dotnet = pkgs.dotnetCorePackages.combinePackages [
@@ -55,8 +55,12 @@ in
   # Locally built Avalonia applications have no Nix RUNPATH for SkiaSharp.
   # Make the native GUI libraries available to applications launched from the
   # desktop session as well as from terminals and IDEs.
-  environment.sessionVariables.LD_LIBRARY_PATH =
-    pkgs.lib.makeLibraryPath riderGuiDeps;
+  # SANE adds /etc/sane-libs to the same variable.  This option is unique, so
+  # define the complete colon-separated path at a higher priority.
+  environment.sessionVariables.LD_LIBRARY_PATH = lib.mkForce [
+    (pkgs.lib.makeLibraryPath riderGuiDeps)
+    "/etc/sane-libs"
+  ];
 
   environment.systemPackages = with pkgs; [
     # ui
