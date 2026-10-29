@@ -57,9 +57,14 @@ in
   # which is maintained by Codex itself.
   home.activation.installCodexSkills = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     ${pkgs.coreutils}/bin/rm -f \
+      "${codexSkillDirectory}/ask-clarifying-questions/SKILL.md" \
       "${codexSkillDirectory}/figma-design-to-code/SKILL.md" \
       "${codexSkillDirectory}/figma-to-avalonia/SKILL.md" \
       "${codexSkillDirectory}/vikunja-gtd-task-creator/SKILL.md"
+
+    ${pkgs.coreutils}/bin/install -m 0644 \
+      "${codexSkills}/ask-clarifying-questions/SKILL.md" \
+      "${codexSkillDirectory}/ask-clarifying-questions/"
 
     ${pkgs.coreutils}/bin/install -m 0644 \
       "${codexSkills}/figma-design-to-code/SKILL.md" \
