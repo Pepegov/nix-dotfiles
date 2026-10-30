@@ -5,6 +5,35 @@ Update system
 sudo nixos-rebuild switch --flake ~/nix --impure
 ```
 
+## NVIDIA modes
+
+`nvidia-sync` is the default mode. NVIDIA drives the displays, so the regular
+system update command above keeps Xorg and `/run/opengl-driver` on the same
+driver set.
+
+`nvidia-offload` is an optional specialisation. It keeps AMD as the display
+GPU and uses NVIDIA only for applications explicitly launched through PRIME
+offload:
+
+```bash
+sudo /run/current-system/specialisation/nvidia-offload/bin/switch-to-configuration switch
+```
+
+Switching between sync and offload changes the GPU that owns the Xorg display.
+End the graphical session and start a new one after such a switch. Do not run
+the base configuration over an active offload session, or GL applications can
+receive libraries for a different GPU and fail with errors such as:
+
+```text
+Error: "failed to find suitable GL configuration."
+```
+
+```bash
+sudo nixos-rebuild switch --flake ~/nix --impure
+```
+
+This restores the default NVIDIA sync mode.
+
 Update home-manager
 ```bash
 home-manager switch --flake ~/nix --impure

@@ -25,6 +25,30 @@
         ];
     };
 
+    # NVIDIA sync is the normal desktop mode: Xorg and the GL driver set use
+    # the same GPU, so an ordinary `nixos-rebuild switch` is safe.
+    services.xserver.deviceSection = lib.mkDefault ''
+        Option "AllowEmptyInitialConfiguration" "on"
+        Option "DRI" "3"
+    '';
+    services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
+    boot.initrd.kernelModules = [
+        "tun"
+        "amdgpu"
+    ];
+    system.nixos.tags = lib.mkDefault [ "nvidia-sync" ];
+    hardware.nvidia = {
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        open = false; # because the video acceleration is unstable when true
+        nvidiaSettings = true;
+        prime = {
+            sync.enable = lib.mkDefault true;
+            amdgpuBusId = "PCI:102:0:0";
+            nvidiaBusId = "PCI:1:0:0";
+        };
+        modesetting.enable = true;
+    };
+
     specialisation = {
         nvidia-offload.configuration = {
             services.xserver.deviceSection = ''
@@ -40,12 +64,9 @@
             ];
 
             system.nixos.tags = [ "nvidia-offload" ];
-            services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
             hardware.nvidia = {
-                package = config.boot.kernelPackages.nvidiaPackages.stable;
-                open = false; # because the video acceleration is unstable when true
-                nvidiaSettings = true;
                 prime = {
+                    sync.enable = lib.mkForce false;
                     offload.enable = true;
                     offload.enableOffloadCmd = true;
                     amdgpuBusId = "PCI:102:0:0";
@@ -53,33 +74,6 @@
                 };
                 powerManagement.enable = true;
                 powerManagement.finegrained = true;
-                modesetting.enable = true;
-            };
-        };
-
-        nvidia-sync.configuration = { 
-            services.xserver.deviceSection = ''
-                Option "AllowEmptyInitialConfiguration" "on"
-                Option "DRI" "3"
-            '';
-            
-            boot.initrd.kernelModules = [
-                "tun"
-                "amdgpu"
-            ];
-            
-            system.nixos.tags = [ "nvidia-sync" ];
-            services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
-            hardware.nvidia = {
-                package = config.boot.kernelPackages.nvidiaPackages.stable;
-                open = false; # because the video acceleration is unstable when true
-                nvidiaSettings = true;
-                prime = {
-                    sync.enable = true;
-                    amdgpuBusId = "PCI:102:0:0";
-                    nvidiaBusId = "PCI:1:0:0";
-                };
-                modesetting.enable = true;
             };
         };
     };
