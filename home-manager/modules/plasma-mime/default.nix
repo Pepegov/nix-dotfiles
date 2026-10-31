@@ -80,9 +80,7 @@
     "image/x-xpixmap" = "viewnior.desktop";
     "image/x-pcx" = "viewnior.desktop";
     
-    # PDF - браузер (Firefox/Chromium)
-    "application/pdf" = [
-      "firefox.desktop"
-    ];
+    # PDF - Atril
+    "application/pdf" = "atril.desktop";
   };
 }

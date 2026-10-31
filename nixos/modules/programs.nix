@@ -81,6 +81,7 @@
     kdePackages.ffmpegthumbs
     blueman # Bluetooth configuration tool
     alacritty # Terminal
+    atril # PDF reader
     vlc # Video loader
     yandex-music # Music
     eartag #simple ID3 tag manager
