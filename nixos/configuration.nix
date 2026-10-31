@@ -29,6 +29,12 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    config.common.default = "*";
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 

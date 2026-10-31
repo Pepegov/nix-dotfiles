@@ -1,5 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
 	imports = [
+			inputs.artcraft.homeModules.crafts
 			./modules/agents
 			./modules/alacritty
 			./modules/apps
@@ -32,6 +33,20 @@
 			feh
 		];
 	};
+
+	programs.crafts.enable = [
+		"photocraft"
+		"filmcraft"
+		"pdfcraft"
+		"figcraft"
+	];
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+		config.common.default = "*";
+	};
+
 	home.file."Pictures/Screenshots/.keep".text = "";
 	programs.bash = {
 		enable = true;

@@ -5,6 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     openspec.url = "github:Fission-AI/OpenSpec";
+    artcraft = {
+      url = "github:mahlquistj/artcraft-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     calendarflow = {
       url = "path:/home/pepegov/repositoryes/Private_GitHub/CalendarFlow";
       inputs.nixpkgs.follows = "nixpkgs";

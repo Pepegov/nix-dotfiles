@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "artcraft": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793016970,
+        "narHash": "sha256-e3CFJlstOKEZV4390cMpENWAcs8jXWJ7EXKv2YiPLwI=",
+        "owner": "mahlquistj",
+        "repo": "artcraft-flake",
+        "rev": "1130dc7e31abe8a130977f52965fb380734f3233",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mahlquistj",
+        "repo": "artcraft-flake",
+        "type": "github"
+      }
+    },
     "calendarflow": {
       "inputs": {
         "nixpkgs": [
@@ -149,6 +169,7 @@
     },
     "root": {
       "inputs": {
+        "artcraft": "artcraft",
         "calendarflow": "calendarflow",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
