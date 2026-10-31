@@ -57,7 +57,7 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a kate state=floating follow=on focus=on
 
-bspc rule -a md.Obsidian desktop='^6'
+bspc rule -a md.obsidian.Obsidian desktop='^6'
 bspc rule -a nextcloud desktop='^6'
 
 bspc rule -a Blueberry.py desktop='^8'
@@ -67,7 +67,7 @@ bspc rule -a Throne desktop='^8'
 
 bspc rule -a TelegramDesktop desktop='^9'
 bspc rule -a yandex-music desktop='^9'
-bspc rule -a Evolution desktop='^9'
+bspc rule -a Org.gnome.Evolution desktop='^9'
 
 bspc rule -a qutebrowser desktop='^10'
 bspc rule -a firefox desktop='^10'
