@@ -24,11 +24,11 @@
 	home = {
 		username = "pepegov";
 		homeDirectory = "/home/pepegov";
-		stateVersion = "25.11";
+		stateVersion = "26.05";
 
 		# only for current user
 		packages = with pkgs; [
-			neofetch
+			fastfetch
 			feh
 		];
 	};
