@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-options="⏻ Poweroff\n🔄 Reboot\n🌙 Suspend\n💤 Hibernate\n🚪 Logout\n🔒 Lock"
+options="\n󰍃\n\n\n󰜉\n"
 
-chosen=$(echo -e "$options" | rofi -dmenu -i -theme-str 'inputbar { enabled: false; }')
+chosen=$(printf '%b\n' "$options" | rofi -dmenu -i -no-custom \
+    -theme "$HOME/.config/rofi/powermenu.rasi")
 
 case "$chosen" in
-    "⏻ Poweroff")
+    "")
         systemctl poweroff
         ;;
-    "🔄 Reboot")
+    "󰜉")
         systemctl reboot
         ;;
-    "🌙 Suspend")
+    "")
         systemctl suspend
         ;;
-    "💤 Hibernate")
+    "")
         systemctl hibernate
         ;;
-    "🚪 Logout")
+    "󰍃")
         bspc quit
         ;;
-    "🔒 Lock")
+    "")
         light-locker-command -l
         ;;
 esac

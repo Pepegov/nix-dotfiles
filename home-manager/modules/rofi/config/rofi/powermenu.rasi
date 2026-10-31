@@ -1,0 +1,45 @@
+@theme "theme.rasi"
+
+window {
+    width: 600px;
+    padding: 8px;
+    background-color: @surface;
+    border: 2px;
+    border-color: #5C4939;
+    border-radius: 28px;
+}
+
+mainbox {
+    children: [ listview ];
+    spacing: 0px;
+}
+
+inputbar {
+    enabled: false;
+}
+
+listview {
+    lines: 1;
+    columns: 6;
+    spacing: 4px;
+    fixed-height: true;
+}
+
+element {
+    children: [ element-text ];
+    padding: 16px 0px;
+    background-color: transparent;
+    text-color: @fg-muted;
+    border-radius: 18px;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @accent;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    font: "JetBrainsMono Nerd Font 22";
+}
