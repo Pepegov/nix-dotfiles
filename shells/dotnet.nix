@@ -20,15 +20,15 @@ let
   riderGuiDeps = with dotnetPkgs; [
     fontconfig
     freetype
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXrandr
-    xorg.libXi
-    xorg.libXcursor
-    xorg.libXfixes
-    xorg.libICE
-    xorg.libSM
+    libx11
+    libxext
+    libxrender
+    libxrandr
+    libxi
+    libxcursor
+    libxfixes
+    libice
+    libsm
     mesa
     libGL
     wayland
@@ -51,6 +51,7 @@ in
 dotnetPkgs.mkShell {
   nativeBuildInputs = with dotnetPkgs; [
     dotnet
+    dotnetPkgs."dotnet-ef"
     bashInteractive
     bun
     nodejs

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
     services.xserver = {
@@ -13,8 +13,6 @@
             variant = "";
         };
 
-        # Budgie envinroment
-        desktopManager.budgie.enable = true;
         # Configure bspwm
         windowManager.bspwm.enable = true;
         # Slick greeter rejects NixOS session names such as `none+bspwm` and
@@ -49,6 +47,27 @@
             };
         };
     };
+
+    # Budgie environment
+    services.desktopManager.budgie.enable = true;
+
+    # Run after PRIME has connected the output providers and enabled displays.
+    # Output names differ between NVIDIA modes, so identify the laptop panel
+    # by its stable eDP prefix instead of a driver-specific full name.
+    services.xserver.displayManager.setupCommands = lib.mkAfter ''
+        internal_display=$(${pkgs.xrandr}/bin/xrandr --query | ${pkgs.gawk}/bin/awk '/ connected/ && $1 ~ /^eDP/ { print $1; exit }')
+        external_display=$(${pkgs.xrandr}/bin/xrandr --query | ${pkgs.gawk}/bin/awk '/ connected/ && $1 !~ /^eDP/ { print $1; exit }')
+
+        if [ -n "$external_display" ] && [ -n "$internal_display" ]; then
+            ${pkgs.xrandr}/bin/xrandr --output "$external_display" --auto
+            ${pkgs.xrandr}/bin/xrandr --output "$internal_display" --auto --right-of "$external_display" --primary
+        elif [ -n "$internal_display" ]; then
+            ${pkgs.xrandr}/bin/xrandr --output "$internal_display" --auto --primary
+        elif [ -n "$external_display" ]; then
+            ${pkgs.xrandr}/bin/xrandr --output "$external_display" --auto --primary
+        fi
+    '';
+
     services.displayManager.defaultSession = "none+bspwm";
 
     # environment.sessionVariables = {

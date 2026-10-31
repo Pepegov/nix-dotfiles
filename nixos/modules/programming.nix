@@ -52,6 +52,35 @@ let
 
 in
 {
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    glibc
+    zlib
+    openssl
+    icu
+    libuuid
+    krb5
+    libunwind
+
+    # Avalonia / SkiaSharp native dependencies for locally built .NET apps.
+    fontconfig
+    freetype
+    libx11
+    libxext
+    libxrender
+    libxrandr
+    libxi
+    libxcursor
+    libxfixes
+    libice
+    libsm
+    mesa
+    libGL
+    wayland
+  ];
+
   # Locally built Avalonia applications have no Nix RUNPATH for SkiaSharp.
   # Make the native GUI libraries available to applications launched from the
   # desktop session as well as from terminals and IDEs.
@@ -73,7 +102,7 @@ in
     # Ai tools
     pkgs-unstable.code-cursor
     pkgs-unstable.opencode
-    inputs.openspec.packages.${pkgs.system}.default
+    inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     lmstudio
 
     # .net
@@ -120,7 +149,7 @@ in
     # front
     pnpm
     nodejs_24
-    nodePackages.typescript
+    typescript
     bun
 
     # arduino
@@ -159,6 +188,5 @@ in
   # fix CVE: CVE-2026-111943
   security.pki.caCertificateBlacklist = [
     "Comodo AAA Services root"
-    "emSign ECC Root CA - G3"
   ];
 }
