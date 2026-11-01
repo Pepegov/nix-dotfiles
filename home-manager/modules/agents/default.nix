@@ -13,5 +13,4 @@ in
     source = ./config/common/skills;
     recursive = true;
   };
-
 }

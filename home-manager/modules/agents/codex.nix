@@ -78,9 +78,12 @@ in
           env_vars = [ "FIGMA_API_KEY" ];
         };
         github = {
-          args = [ "-y" "@modelcontextprotocol/server-github" ];
-          command = "npx";
+          bearer_token_env_var = "GITHUB_PERSONAL_ACCESS_TOKEN";
           enabled = true;
+          headers = {
+            X-MCP-Toolsets = "default,actions";
+          };
+          url = "https://api.githubcopilot.com/mcp/";
         };
         gitlab = {
           args = [ "-lc" "GITLAB_PERMISSION_MODE=modify exec npx -y @zereight/mcp-gitlab@2.3.4" ];
@@ -129,6 +132,7 @@ in
   home.file.".codex/skills/figma-design-to-code".force = true;
   home.file.".codex/skills/figma-to-avalonia".force = true;
   home.file.".codex/skills/vikunja-gtd-task-creator".force = true;
+  home.file.".codex/skills/prd-writing".force = true;
 
   # Codex rejects symbolic links for custom agent role files. Home Manager
   # normally deploys `source` entries as links into /nix/store, so materialize
@@ -150,5 +154,18 @@ in
       "${codexAgents}/qa_verifier.toml" \
       "${codexAgents}/security_auditor.toml" \
       "${codexAgentDirectory}"
+  '';
+
+  # Codex materializes these Home Manager-managed links as directories.
+  home.activation.cleanManagedCodexArtifacts = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
+    ${pkgs.coreutils}/bin/rm -rf \
+      "${config.home.homeDirectory}/.agents/plugins/superpowers" \
+      "${config.home.homeDirectory}/.agents/plugins/ponytail" \
+      "${config.home.homeDirectory}/.codex/plugins/cache/home-manager/superpowers/local" \
+      "${config.home.homeDirectory}/.codex/plugins/cache/home-manager/ponytail/local" \
+      "${config.home.homeDirectory}/.codex/skills/ask-clarifying-questions" \
+      "${config.home.homeDirectory}/.codex/skills/figma-design-to-code" \
+      "${config.home.homeDirectory}/.codex/skills/figma-to-avalonia" \
+      "${config.home.homeDirectory}/.codex/skills/vikunja-gtd-task-creator"
   '';
 }

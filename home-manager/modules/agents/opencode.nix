@@ -1,4 +1,4 @@
-;{ ... }:
+{ ... }:
 
 {
   programs.opencode = {
@@ -43,8 +43,13 @@
           enabled = true;
         };
         github = {
-          type = "local";
-          command = [ "npx" "-y" "@modelcontextprotocol/server-github" ];
+          type = "remote";
+          url = "https://api.githubcopilot.com/mcp/";
+          oauth = false;
+          headers = {
+            Authorization = "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}";
+            X-MCP-Toolsets = "default,actions";
+          };
           enabled = true;
         };
         gitlab = {
