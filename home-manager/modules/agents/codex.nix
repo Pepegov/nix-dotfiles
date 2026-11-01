@@ -122,6 +122,7 @@ in
         "/home/pepegov/repositoryes/Private_GitHub/nixos_crypto".trust_level = "trusted";
         "/home/pepegov/repositoryes/Umbrella/ansible".trust_level = "trusted";
         "/home/pepegov/repositoryes/Umbrella/management-center".trust_level = "trusted";
+        "/home/pepegov/repositoryes/GITHUB/yt-dlp-downloader".trust_level = "trusted";
       };
     };
   };
@@ -133,6 +134,8 @@ in
   home.file.".codex/skills/figma-to-avalonia".force = true;
   home.file.".codex/skills/vikunja-gtd-task-creator".force = true;
   home.file.".codex/skills/prd-writing".force = true;
+  home.file.".codex/skills/ui-designer".force = true;
+  home.file.".codex/skills/spec-from-screenshot".force = true;
 
   # Codex rejects symbolic links for custom agent role files. Home Manager
   # normally deploys `source` entries as links into /nix/store, so materialize
