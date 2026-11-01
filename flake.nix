@@ -5,6 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     openspec.url = "github:Fission-AI/OpenSpec";
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
     artcraft = {
       url = "github:mahlquistj/artcraft-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,8 +23,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     nixvim = {
@@ -45,6 +53,7 @@
     pkgs-unstable = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
+      overlays = [ vscode-extensions.overlays.default ];
     };
   in
   {
@@ -61,7 +70,7 @@
     };
 
     homeConfigurations.pepegov = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;                    
+      pkgs = pkgs-unstable;
 
       extraSpecialArgs = {
         inherit inputs;
