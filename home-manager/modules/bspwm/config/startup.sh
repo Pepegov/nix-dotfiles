@@ -1,7 +1,6 @@
 #!/bin/sh
 setxkbmap us,ru -option grp:alt_shift_toggle &
 xfce4-clipman &
-alacritty &
 (sleep 3; firefox) &
 #v2rayN &
 Throne &
