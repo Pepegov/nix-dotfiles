@@ -38,6 +38,8 @@ let
     stdenv.cc.cc
     zlib
     openssl
+    libpulseaudio
+    alsa-lib
     icu
     libuuid
     krb5
