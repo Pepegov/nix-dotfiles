@@ -34,6 +34,9 @@ in
       model_reasoning_effort = "medium";
       personality = "pragmatic";
       sandbox_mode = "danger-full-access";
+      notice = {
+        hide_rate_limit_model_nudge = true;
+      };
 
       agents = {
         enabled = true;
