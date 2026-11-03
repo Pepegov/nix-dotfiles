@@ -8,6 +8,7 @@
 			./modules/delayed-shutdown
 			./modules/dictation
 			./modules/dunst
+			./modules/eww
 			./modules/environment
 			./modules/git
 			./modules/night-mode

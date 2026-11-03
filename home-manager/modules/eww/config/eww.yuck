@@ -1,0 +1,106 @@
+;; Polls return a single JSON object. Eww can access its fields directly.
+(defpoll codex_limits :interval "1m"
+  :initial "{\"ok\":false,\"five_used\":0,\"five_left\":0,\"five_reset\":\"—\",\"week_ok\":false,\"week_used\":0,\"week_left\":0,\"week_reset\":\"—\"}"
+  "~/.config/eww/scripts/codex-limits.sh")
+
+(defpoll exchange_rates :interval "5m"
+  :initial "{\"ok\":false,\"usd_rub\":\"—\",\"eur_rub\":\"—\",\"btc_usd\":\"—\",\"eth_usd\":\"—\",\"sol_usd\":\"—\"}"
+  "~/.config/eww/scripts/exchange-rates.sh")
+
+;; Common card header.
+(defwidget panel-header [icon title]
+  (box :class "panel-header" :orientation "h" :space-evenly false
+    (label :class "panel-icon" :text icon)
+    (box :class "header-separator")
+    (label :class "panel-title" :text title)))
+
+;; Used% fills the bar; remaining% is shown on the right.
+(defwidget limit-meter [name reset remaining used tone]
+  (box :class "limit-block" :orientation "v" :space-evenly false
+    (box :class "limit-top" :orientation "h" :space-evenly false
+      (label :class "limit-name" :text name :hexpand true :halign "start")
+      (label :class "limit-remaining" :text remaining :halign "end"))
+    (label :class "limit-reset" :text reset :halign "start")
+    (progress :class "usage-bar ${tone}"
+              :orientation "h"
+              :hexpand true
+              :value used)))
+
+;; Right-aligned value rows, so changing prices do not shift the labels.
+(defwidget rate-row [pair value]
+  (box :class "rate-row" :orientation "h" :space-evenly false
+    (label :class "rate-pair" :text pair :hexpand true :halign "start")
+    (label :class "rate-value" :text value :halign "end")))
+
+(defwidget codex-card []
+  (box :class "panel codex-panel" :orientation "v" :space-evenly false
+    (panel-header :icon "󰚩" :title "CODEX LIMITS")
+    (box :class "panel-divider")
+
+    (box :class "limits-body" :orientation "v" :space-evenly false
+         :visible {codex_limits.ok}
+      (limit-meter
+        :name "5-hour limit"
+        :reset {codex_limits.five_reset}
+        :remaining "${codex_limits.five_left}% left"
+        :used {codex_limits.five_used}
+        :tone {codex_limits.five_left <= 10 ? "critical" : "normal"})
+
+      (box :visible {codex_limits.week_ok}
+        (limit-meter
+          :name "Weekly limit"
+          :reset {codex_limits.week_reset}
+          :remaining "${codex_limits.week_left}% left"
+          :used {codex_limits.week_used}
+          :tone "weekly"))
+
+      (label :visible {!codex_limits.week_ok}
+             :class "hint" :text "Weekly limit unavailable")
+
+      (box :class "footer-divider")
+      (box :class "limit-footer" :orientation "h" :space-evenly false
+        (label :class "footer-value"
+               :text "5H: ${codex_limits.five_used}% used")
+        (label :class "footer-separator" :text "│"
+               :visible {codex_limits.week_ok})
+        (label :class "footer-value"
+               :visible {codex_limits.week_ok}
+               :text "WEEK: ${codex_limits.week_used}% used")))
+
+    (label :class "unavailable"
+           :visible {!codex_limits.ok}
+           :text "Usage data unavailable")))
+
+(defwidget exchange-card []
+  (box :class "panel rates-panel" :orientation "v" :space-evenly false
+    (panel-header :icon "󱎖" :title "EXCHANGE RATES")
+    (box :class "panel-divider")
+
+    (box :class "rates-body" :orientation "v" :space-evenly false
+         :visible {exchange_rates.ok}
+      (rate-row :pair "USD/RUB" :value {exchange_rates.usd_rub})
+      (box :class "rate-divider")
+      (rate-row :pair "EUR/RUB" :value {exchange_rates.eur_rub})
+      (box :class "rate-divider")
+      (rate-row :pair "BTC/USD" :value {exchange_rates.btc_usd})
+      (box :class "rate-divider")
+      (rate-row :pair "ETH/USD" :value {exchange_rates.eth_usd})
+      (box :class "rate-divider")
+      (rate-row :pair "SOL/USD" :value {exchange_rates.sol_usd}))
+
+    (label :class "unavailable"
+           :visible {!exchange_rates.ok}
+           :text "Rates unavailable")))
+
+;; Keep the windows independent, like in your original config.
+(defwindow codex-limits
+  :stacking "bg"
+  :focusable false
+  :geometry (geometry :x "-36px" :y "84px" :width "352px" :anchor "top right")
+  (codex-card))
+
+(defwindow exchange-rates
+  :stacking "bg"
+  :focusable false
+  :geometry (geometry :x "-36px" :y "480px" :width "352px" :anchor "top right")
+  (exchange-card))

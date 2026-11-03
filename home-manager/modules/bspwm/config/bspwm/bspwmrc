@@ -9,6 +9,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
 dbus-update-activation-environment --systemd
 systemctl --user start night-mode-sync.service
+systemctl --user restart eww-external-widgets.service
 
 # Привязка рабочих столов к монитору(ам) -d
 if [ -n "$DISPLAY_EXTERNAL" ]; then
