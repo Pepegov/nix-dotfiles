@@ -1,3 +1,14 @@
+{ pkgs, ... }:
+
+let
+  htmlNotificationFormatter = pkgs.writeShellApplication {
+    name = "dunst-html-notification-formatter";
+    runtimeInputs = [ pkgs.dunst pkgs.libnotify pkgs.python3 ];
+    text = ''
+      exec python3 ${./config/format-html-notification.py}
+    '';
+  };
+in
 {
   # BSPWM does not otherwise start a notification daemon.
   services.dunst = {
@@ -15,6 +26,7 @@
 
         font = "JetBrainsMono Nerd Font 11";
         markup = "full";
+        always_run_script = true;
         format = "<b>%s</b>\\n%b";
         alignment = "left";
         vertical_alignment = "center";
@@ -67,6 +79,12 @@
         frame_color = "#C17C5D";
         highlight = "#C17C5D";
         timeout = 0;
+      };
+
+      KDEConnectHtml = {
+        appname = "KDE Connect";
+        format = "";
+        script = "${htmlNotificationFormatter}/bin/dunst-html-notification-formatter";
       };
     };
   };
