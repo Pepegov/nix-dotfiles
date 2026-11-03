@@ -9,6 +9,14 @@
     lightlocker
   ];
 
+  # light-locker is started below by LightDM. Hide its package-provided XDG
+  # autostart entry so systemd does not launch a second instance without a
+  # graphical session id.
+  environment.etc."xdg/autostart/light-locker.desktop".text = ''
+    [Desktop Entry]
+    Hidden=true
+  '';
+
   # Настройка реакции на крышку
   services.logind.settings.Login = {
     HandleLidSwitch = "lock";
