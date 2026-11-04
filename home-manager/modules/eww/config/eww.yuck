@@ -95,12 +95,16 @@
 ;; Keep the windows independent, like in your original config.
 (defwindow codex-limits
   :stacking "bg"
+  :windowtype "desktop"
+  :wm-ignore false
   :focusable false
   :geometry (geometry :x "-36px" :y "84px" :width "352px" :anchor "top right")
   (codex-card))
 
 (defwindow exchange-rates
   :stacking "bg"
+  :windowtype "desktop"
+  :wm-ignore false
   :focusable false
   :geometry (geometry :x "-36px" :y "480px" :width "352px" :anchor "top right")
   (exchange-card))

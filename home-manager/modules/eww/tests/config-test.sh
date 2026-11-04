@@ -11,6 +11,12 @@ test -f "$yuck"
 test -f "$module"
 grep -Fq '(defwindow codex-limits' "$yuck"
 grep -Fq '(defwindow exchange-rates' "$yuck"
+for window in codex-limits exchange-rates; do
+  window_definition="$(sed -n "/(defwindow $window/,/^  (.*))$/p" "$yuck")"
+  grep -Fq ':stacking "bg"' <<<"$window_definition"
+  grep -Fq ':windowtype "desktop"' <<<"$window_definition"
+  grep -Fq ':wm-ignore false' <<<"$window_definition"
+done
 grep -Fq ':x "-36px"' "$yuck"
 grep -Fq ':y "480px"' "$yuck"
 grep -Fq ':width "352px"' "$yuck"
