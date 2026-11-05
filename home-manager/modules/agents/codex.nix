@@ -17,11 +17,22 @@ let
 
   codexAgents = ./config/codex/agents;
   codexAgentDirectory = "${config.home.homeDirectory}/.codex/agents";
+  codexContext = ''
+    ${builtins.readFile ./config/common/AGENTS.md}
+
+    ## Рабочий процесс Codex
+
+    Для обычных задач сразу выполняй работу. Не создавай автоматически design-документы, спеки, планы или другие процессные файлы и не запрашивай их согласование.
+
+    Не создавай и не изменяй `docs/superpowers/specs/`, `docs/superpowers/plans/` и подобные документы, если пользователь явно не попросил создать план, спецификацию или документацию.
+
+    Навыки Superpowers можно применять для диагностики, тестов и проверки результата, но не следуй их требованиям создавать документы, проводить обязательный brainstorming или ждать одобрения дизайна для обычных задач. Явная просьба пользователя о планировании или документации имеет приоритет.
+  '';
 in
 {
   programs.codex = {
     enable = true;
-    context = ./config/common/AGENTS.md;
+    context = codexContext;
     skills = ./config/common/skills;
     plugins = [
       ponytailPlugin
@@ -126,6 +137,7 @@ in
         "/home/pepegov/repositoryes/Umbrella/ansible".trust_level = "trusted";
         "/home/pepegov/repositoryes/Umbrella/management-center".trust_level = "trusted";
         "/home/pepegov/repositoryes/GITHUB/yt-dlp-downloader".trust_level = "trusted";
+        "/home/pepegov/repositoryes/Umbrella/usiem-api".trust_level = "trusted";
       };
     };
   };

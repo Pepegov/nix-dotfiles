@@ -101,7 +101,6 @@ in
   
     # Ai tools
     pkgs-unstable.code-cursor
-    pkgs-unstable.opencode
     inputs.openspec.packages.${pkgs.stdenv.hostPlatform.system}.default
     lmstudio
 
