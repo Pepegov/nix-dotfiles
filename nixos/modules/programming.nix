@@ -38,6 +38,8 @@ let
     mesa
     libGL
     wayland
+    libpulseaudio
+    alsa-lib
   ];
 
   rider = pkgs.jetbrains.rider.overrideAttrs (old: {
