@@ -53,10 +53,6 @@
     htop
     btop
 
-    #ai
-    openai-whisper
-    pkgs-unstable.codex
-    
     mesa-demos
     zip
     unzip

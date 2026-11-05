@@ -92,8 +92,27 @@ stop_recording() {
         return 1
     fi
 
-    notify "Распознавание" "Whisper small обрабатывает запись локально."
-    if ! whisper "${audio_file}" --model small --task transcribe --output_dir "${work_dir}" --output_format txt --verbose False >/dev/null 2>&1; then
+    local model_dir model_file
+    model_dir="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-cpp"
+    model_file="${model_dir}/ggml-small.bin"
+
+    if [ ! -s "${model_file}" ]; then
+        mkdir -p "${model_dir}"
+        notify "Загрузка модели" "Whisper small скачается один раз."
+        if ! curl --fail --location --retry 5 --retry-all-errors \
+          --output "${model_file}.tmp" \
+          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin" \
+          || ! mv "${model_file}.tmp" "${model_file}"; then
+            rm -f "${model_file}.tmp"
+            cleanup "${work_dir}"
+            notify "Не удалось скачать модель Whisper"
+            return 1
+        fi
+    fi
+
+    notify "Распознавание" "Whisper small обрабатывает запись на GPU."
+    if ! whisper-cli --model "${model_file}" --file "${audio_file}" \
+      --language ru --output-txt --output-file "${work_dir}/dictation" --no-timestamps --no-prints >/dev/null 2>&1; then
         cleanup "${work_dir}"
         notify "Не удалось распознать речь"
         return 1

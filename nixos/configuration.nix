@@ -24,10 +24,19 @@
       ./modules/magicmouse.nix
       ./modules/printing.nix
       ./modules/garbage-collector.nix
+      ./modules/freellmapi.nix
       ./modules/programs.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    extra-substituters = [ "https://cache.nixos-cuda.org" ];
+    extra-trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+    ];
+    http2 = false;
+    download-attempts = 10;
+  };
 
   xdg.portal = {
     enable = true;

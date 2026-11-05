@@ -1,14 +1,19 @@
 { pkgs, lib, ... }:
 
 let
+  whisper = pkgs.whisper-cpp.override {
+    cudaSupport = true;
+  };
+
   dictation = pkgs.writeShellApplication {
     name = "dictation";
     runtimeInputs = with pkgs; [
       coreutils
+      curl
       libnotify
-      openai-whisper
       pipewire
       procps
+      whisper
       xclip
       xdotool
     ];
