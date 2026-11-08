@@ -24,7 +24,7 @@
       ./modules/magicmouse.nix
       ./modules/printing.nix
       ./modules/garbage-collector.nix
-      ./modules/freellmapi.nix
+      ./modules/ai.nix
       ./modules/programs.nix
     ];
 
@@ -62,7 +62,7 @@
   };
 
   boot.extraModprobeConfig = ''
-    options rtw89_pci disable_clkreq=y disable_aspm_l1=y disable_aspm_l1ss=y
+    options rtw89_pci disable_clkreq=y disable_aspm_l1=y disable_aspm_l1ss=y disable_lps_deep=y disable_keep_alive=y
   '';
 
   system.stateVersion = "26.05";
