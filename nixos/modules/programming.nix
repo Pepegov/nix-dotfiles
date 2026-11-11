@@ -99,7 +99,7 @@ in
     rider
     jetbrains.datagrip
     postman
-    vscode
+    pkgs-unstable.vscode
   
     # Ai tools
     pkgs-unstable.code-cursor
