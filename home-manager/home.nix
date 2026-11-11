@@ -52,8 +52,9 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			rebuild-nix = "sudo nixos-rebuild boot --flake ~/nix --impure";
-            rebuild-home-manager = "home-manager switch --impure --flake ~/nix";
+			rebuild-nix-boot = "sudo nixos-rebuild boot --flake ~/nix --impure";
+      rebuild-nix-switch = "sudo nixos-rebuild switch --flake ~/nix --impure";
+      rebuild-home-manager = "home-manager switch --impure --flake ~/nix";
 		};
 	};
 }
