@@ -4,7 +4,7 @@
   "~/.config/eww/scripts/codex-limits.sh")
 
 (defpoll exchange_rates :interval "5m"
-  :initial "{\"ok\":false,\"usd_rub\":\"—\",\"eur_rub\":\"—\",\"btc_usd\":\"—\",\"eth_usd\":\"—\",\"sol_usd\":\"—\"}"
+  :initial "{\"ok\":false,\"usd_rub\":\"—\",\"eur_rub\":\"—\",\"btc_usd\":\"—\",\"eth_usd\":\"—\",\"sol_usd\":\"—\",\"usd_month\":\"—\",\"usd_week\":\"—\",\"usd_trend\":\"up\",\"eur_month\":\"—\",\"eur_week\":\"—\",\"eur_trend\":\"up\",\"btc_month\":\"—\",\"btc_week\":\"—\",\"btc_trend\":\"up\",\"eth_month\":\"—\",\"eth_week\":\"—\",\"eth_trend\":\"up\",\"sol_month\":\"—\",\"sol_week\":\"—\",\"sol_trend\":\"up\"}"
   "~/.config/eww/scripts/exchange-rates.sh")
 
 ;; Common card header.
@@ -26,11 +26,15 @@
               :hexpand true
               :value used)))
 
-;; Right-aligned value rows, so changing prices do not shift the labels.
-(defwidget rate-row [pair value]
+;; Compact columns keep current and historical quotes readable at a glance.
+(defwidget rate-row [pair month week trend value]
   (box :class "rate-row" :orientation "h" :space-evenly false
     (label :class "rate-pair" :text pair :hexpand true :halign "start")
-    (label :class "rate-value" :text value :halign "end")))
+    (label :class "rate-history month" :text "1MO ${month}" :width 75 :halign "start")
+    (label :class "rate-history week" :text "7D ${week}" :width 62 :halign "start")
+    (label :class "rate-trend ${trend}"
+           :text {trend == "up" ? "▲" : "▼"} :width 22 :halign "center")
+    (label :class "rate-value" :text value :width 64 :halign "end")))
 
 (defwidget codex-card []
   (box :class "panel codex-panel" :orientation "v" :space-evenly false
@@ -78,15 +82,25 @@
 
     (box :class "rates-body" :orientation "v" :space-evenly false
          :visible {exchange_rates.ok}
-      (rate-row :pair "USD/RUB" :value {exchange_rates.usd_rub})
+      (rate-row :pair "USD/RUB"
+                :month {exchange_rates.usd_month} :week {exchange_rates.usd_week}
+                :trend {exchange_rates.usd_trend} :value {exchange_rates.usd_rub})
       (box :class "rate-divider")
-      (rate-row :pair "EUR/RUB" :value {exchange_rates.eur_rub})
+      (rate-row :pair "EUR/RUB"
+                :month {exchange_rates.eur_month} :week {exchange_rates.eur_week}
+                :trend {exchange_rates.eur_trend} :value {exchange_rates.eur_rub})
       (box :class "rate-divider")
-      (rate-row :pair "BTC/USD" :value {exchange_rates.btc_usd})
+      (rate-row :pair "BTC/USD"
+                :month {exchange_rates.btc_month} :week {exchange_rates.btc_week}
+                :trend {exchange_rates.btc_trend} :value {exchange_rates.btc_usd})
       (box :class "rate-divider")
-      (rate-row :pair "ETH/USD" :value {exchange_rates.eth_usd})
+      (rate-row :pair "ETH/USD"
+                :month {exchange_rates.eth_month} :week {exchange_rates.eth_week}
+                :trend {exchange_rates.eth_trend} :value {exchange_rates.eth_usd})
       (box :class "rate-divider")
-      (rate-row :pair "SOL/USD" :value {exchange_rates.sol_usd}))
+      (rate-row :pair "SOL/USD"
+                :month {exchange_rates.sol_month} :week {exchange_rates.sol_week}
+                :trend {exchange_rates.sol_trend} :value {exchange_rates.sol_usd}))
 
     (label :class "unavailable"
            :visible {!exchange_rates.ok}

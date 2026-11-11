@@ -153,6 +153,31 @@ $danger: #C17C5D;
     opacity: 0.6;
 }
 
+.rates-panel .rate-pair {
+    min-width: 91px;
+}
+
+.rate-history {
+    color: $bright;
+    font-size: 10px;
+}
+
+.rate-trend {
+    font-size: 15px;
+}
+
+.rate-trend.up {
+    color: #5EE257;
+}
+
+.rate-trend.down {
+    color: #F34B4B;
+}
+
+.rate-trend.flat {
+    color: transparent;
+}
+
 .unavailable,
 .hint {
     color: $muted;
