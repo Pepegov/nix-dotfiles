@@ -5,6 +5,16 @@ Update system
 sudo nixos-rebuild switch --flake ~/nix --impure
 ```
 
+Update all flakes
+```bash
+nix flake update
+```
+
+Update calendarflow flake
+```bash
+nix flake update calendarflow
+```
+
 ## NVIDIA modes
 
 `nvidia-sync` is the default mode. NVIDIA drives the displays, so the regular

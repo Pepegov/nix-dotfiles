@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     calendarflow = {
-      url = "path:/home/pepegov/repositoryes/Private_GitHub/CalendarFlow";
+      url = "git+ssh://git@github.com/Pepegov/CalendarFlow.git?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -53,7 +53,10 @@
     pkgs-unstable = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
-      overlays = [ vscode-extensions.overlays.default ];
+      overlays = [
+        vscode-extensions.overlays.default
+        inputs.artcraft.overlays.default
+      ];
     };
   in
   {
