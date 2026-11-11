@@ -14,7 +14,7 @@
 
       plugin = [
         "@dietrichgebert/ponytail"
-        "superpowers@git+https://github.com/obra/superpowers.git"
+        #"superpowers@git+https://github.com/obra/superpowers.git"
       ];
 
       mcp = {
@@ -31,6 +31,15 @@
         vikunja = {
           type = "local";
           command = [ "npx" "-y" "@democratize-technology/vikunja-mcp" ];
+          enabled = true;
+        };
+        firefly-iii = {
+          type = "local";
+          command = [ "bunx" "-y" "@firefly-iii-mcp/local" "--baseUrl" "https://firefly.pepegov.ru" ];
+          environment = {
+            FIREFLY_III_PAT = "{env:FIREFLY_III_PAT}";
+            FIREFLY_III_BASE_URL = "{env:FIREFLY_III_BASE_URL}";
+          };
           enabled = true;
         };
 
@@ -78,6 +87,7 @@
           command = [ "bunx" "figma-mcp-server" ];
           enabled = false;
         };
+
         avalonia = {
           type = "remote";
           url = "https://docs-mcp.avaloniaui.net/mcp";
@@ -87,27 +97,6 @@
           type = "remote";
           url = "http://127.0.0.1:64482/stream";
           enabled = false;
-        };
-      };
-
-      provider.ollama = {
-        npm = "@ai-sdk/openai-compatible";
-        name = "Ollama";
-
-        options = {
-          baseURL = "http://127.0.0.1:11434/v1";
-        };
-
-        models = {
-          "qwen3.6:35b" = {
-            name = "Qwen3.6 35B (Local)";
-
-            limit = {
-              context = 65536;
-              output = 8192;
-            };
-          };
-
         };
       };
     };

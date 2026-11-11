@@ -8,6 +8,7 @@ in
     ./claude.nix
     ./codex.nix
     ./opencode.nix
+    ./pi.nix
   ];
 
   home.file.".agents/skills" = {

@@ -58,5 +58,12 @@ in
       comment = "OpenCode Terminal application";
       icon = "Alacritty";
     })
+    (mkApp {
+      name = "pi-terminal";
+      desktopName = "Pi Coding Agent Terminal";
+      exec = "alacritty -e pi";
+      comment = "Pi Coding Agent Terminal application";
+      icon = "Alacritty";
+    })
   ];
 }

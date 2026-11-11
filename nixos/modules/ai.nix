@@ -11,12 +11,15 @@
     port = 11434;
 
     environmentVariables = {
-      OLLAMA_CONTEXT_LENGTH = "65536";
+      OLLAMA_CONTEXT_LENGTH = "40960";
       OLLAMA_NUM_PARALLEL = "1";
       OLLAMA_MAX_LOADED_MODELS = "1";
 
       OLLAMA_FLASH_ATTENTION = "1";
-      OLLAMA_KV_CACHE_TYPE = "q8_0";
+      OLLAMA_KV_CACHE_TYPE = "q4_0";
+
+      # Уменьшаем резерв GPU
+      LLAMA_ARG_FIT_TARGET = "256";
     };
   };
 
