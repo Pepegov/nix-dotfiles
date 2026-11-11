@@ -3,6 +3,14 @@
 # Native Home Manager configuration for Codex.
 
 let
+  codexVersion = "0.167.0";
+  codexBinary = (pkgs.writeShellScriptBin "codex" ''
+    exec ${pkgs.fetchzip {
+      url = "https://registry.npmjs.org/@openai/codex/-/codex-${codexVersion}-linux-x64.tgz";
+      hash = "sha512-etH0qGmMknNgt/2GxKNWmHH6HyBB/aTvOPdEK5EgVrZZzGYESNnDd+8kMYYHsC7Sr8DZR0oV0BafTnbWSxYTwg==";
+    }}/vendor/x86_64-unknown-linux-musl/bin/codex "$@"
+  '').overrideAttrs (_: { version = codexVersion; });
+
   # Ponytail is distributed as a skill, so package it as a minimal Codex plugin.
   ponytailPlugin = pkgs.runCommand "ponytail" { } ''
     mkdir -p "$out/.codex-plugin" "$out/skills/ponytail"
@@ -32,6 +40,7 @@ in
 {
   programs.codex = {
     enable = true;
+    package = codexBinary;
     context = codexContext;
     skills = ./config/common/skills;
     plugins = [
