@@ -16,10 +16,10 @@ if [ -n "$DISPLAY_EXTERNAL" ]; then
     xrandr --output "$DISPLAY_EXTERNAL" --auto --left-of "$DISPLAY_INTERNAL" --output "$DISPLAY_EXTERNAL" --primary
     # Есть внешний монитор в переменной окружения
     bspc monitor "$DISPLAY_EXTERNAL" -d I II III IV V VI VII VIII
-    bspc monitor "$DISPLAY_INTERNAL" -d IX X
+    bspc monitor "$DISPLAY_INTERNAL" -d IX X XI XII
 else
     # Переменная не задана — считаем, что только встроенный экран
-    bspc monitor "$DISPLAY_INTERNAL" -d I II III IV V VI VII VIII IX X
+    bspc monitor "$DISPLAY_INTERNAL" -d I II III IV V VI VII VIII IX X XI XII
 fi
 
 $HOME/.config/wallpaper-rotate.sh &
