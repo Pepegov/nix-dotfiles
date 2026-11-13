@@ -8,6 +8,7 @@ in
 
   home.packages = with pkgs; [
     jetbrains-mono
+    nil
   ];
 
   programs.vscode = {
@@ -112,6 +113,18 @@ in
         args.text = builtins.fromJSON ''"\u0016\u000a"'';
         when = "terminalFocus";
       }
+
+      # Create a new integrated terminal.
+      { key = "ctrl+shift+t"; command = "workbench.action.terminal.new"; }
+
+      # Open the terminal, creating it on the first use; otherwise toggle visibility.
+      { key = "alt+f12"; command = "workbench.action.terminal.toggleTerminal"; }
+
+      # Remove VS Code's default Toggle Panel shortcut.
+      { key = "ctrl+j"; command = "-workbench.action.togglePanel"; }
+
+      # Close the active integrated terminal.
+      { key = "ctrl+shift+f4"; command = "workbench.action.terminal.kill"; }
 
       # ---------- Refactoring ----------
       { key = "ctrl+alt+shift+t"; command = "editor.action.refactor"; }
