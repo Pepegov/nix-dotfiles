@@ -3,7 +3,7 @@
 let
   night-mode = pkgs.writeShellApplication {
     name = "night-mode";
-    runtimeInputs = [ pkgs.redshift ];
+    runtimeInputs = [ pkgs.coreutils pkgs.gawk pkgs.gnused pkgs.picom pkgs.procps pkgs.redshift pkgs.systemd ];
     text = builtins.readFile ./config/night-mode.sh;
   };
 in
@@ -14,6 +14,9 @@ in
     source = "${night-mode}/bin/night-mode";
     executable = true;
   };
+
+  xdg.configFile."night-mode/grayscale.glsl".source = ./config/grayscale.glsl;
+  xdg.configFile."night-mode/color.glsl".source = ./config/color.glsl;
 
   systemd.user.services = {
     night-mode-on = {
@@ -29,6 +32,14 @@ in
       Service = {
         Type = "oneshot";
         ExecStart = "%h/.config/night-mode.sh day";
+      };
+    };
+
+    night-mode-grayscale = {
+      Unit.Description = "Enable grayscale display mode";
+      Service = {
+        Type = "oneshot";
+        ExecStart = "%h/.config/night-mode.sh grayscale";
       };
     };
 
@@ -55,6 +66,15 @@ in
       Unit.Description = "Restore normal display colors at 08:00";
       Timer = {
         OnCalendar = "*-*-* 08:00:00";
+        Persistent = true;
+      };
+      Install.WantedBy = [ "timers.target" ];
+    };
+
+    night-mode-grayscale = {
+      Unit.Description = "Enable grayscale display mode at 22:30";
+      Timer = {
+        OnCalendar = "*-*-* 22:30:00";
         Persistent = true;
       };
       Install.WantedBy = [ "timers.target" ];
