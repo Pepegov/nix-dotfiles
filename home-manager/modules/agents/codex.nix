@@ -114,6 +114,22 @@ in
           enabled = true;
           env_vars = [ "GITLAB_PERSONAL_ACCESS_TOKEN" "GITLAB_API_URL" ];
         };
+        mariadb = {
+          args = [
+            "-lc"
+            ''
+              source "$HOME/.config/environment/load-local-env.sh"
+              if [[ -z "''${MYSQL_HOST:-}" || -z "''${MYSQL_USER:-}" || -z "''${MYSQL_PASSWORD:-}" ]]; then
+                echo "MYSQL_HOST, MYSQL_USER, and MYSQL_PASSWORD must be set in ~/nix/hidden/enviroment.conf" >&2
+                exit 1
+              fi
+              exec ${pkgs.uv}/bin/uvx --from mysql-mcp-server mysql_mcp_server
+            ''
+          ];
+          command = "bash";
+          enabled = true;
+          env_vars = [ "MYSQL_HOST" "MYSQL_PORT" "MYSQL_USER" "MYSQL_PASSWORD" "MYSQL_DATABASE" ];
+        };
         obsidian = {
           args = [ "-y" "@bitbonsai/mcpvault" "/home/pepegov/Nextcloud/PepegovDB" ];
           command = "npx";
