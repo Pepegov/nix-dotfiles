@@ -7,6 +7,7 @@ Throne &
 blueman-applet &
 nextcloud &
 (sleep 3; obsidian) &
+(sleep 3; calendarflow) &
 Telegram &
 evolution &
 kdeconnect-indicator &

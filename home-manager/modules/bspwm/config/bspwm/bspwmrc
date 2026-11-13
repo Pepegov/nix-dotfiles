@@ -73,6 +73,8 @@ bspc rule -a Org.gnome.Evolution desktop='^9'
 bspc rule -a qutebrowser desktop='^10'
 bspc rule -a firefox desktop='^10'
 
+bspc rule -a CalendarFlow.Desktop desktop='^12'
+
 $HOME/.config/polybar/launch.sh &
 
 $HOME/.config/startup.sh &
