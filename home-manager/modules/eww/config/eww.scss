@@ -20,9 +20,9 @@ $danger: #C17C5D;
 .panel {
     background-color: $surface;
     border: 1px solid $border;
-    border-radius: 19px;
-    padding: 19px 21px;
-    min-width: 352px;
+    border-radius: 20px;
+    padding: 21px 23px;
+    min-width: 387px;
 }
 
 .panel-header {
@@ -31,21 +31,21 @@ $danger: #C17C5D;
 
 .panel-icon {
     color: $accent;
-    font-size: 24px;
-    min-width: 29px;
+    font-size: 26px;
+    min-width: 31px;
 }
 
 .header-separator {
     background-color: $border;
     min-width: 1px;
-    min-height: 24px;
+    min-height: 26px;
     margin-left: 9px;
     margin-right: 14px;
 }
 
 .panel-title {
     color: $accent;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -65,19 +65,19 @@ $danger: #C17C5D;
 
 .limit-name {
     color: $bright;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
 }
 
 .limit-remaining {
     color: $text;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
 }
 
 .limit-reset {
     color: $muted;
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 11px;
 }
 
@@ -119,7 +119,7 @@ $danger: #C17C5D;
 }
 
 .footer-value {
-    font-size: 14px;
+    font-size: 15px;
     color: $accent;
 }
 
@@ -131,17 +131,17 @@ $danger: #C17C5D;
 }
 
 .rate-row {
-    min-height: 36px;
+    min-height: 38px;
 }
 
 .rate-pair {
     color: $text;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .rate-value {
     color: $bright;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -153,17 +153,22 @@ $danger: #C17C5D;
     opacity: 0.6;
 }
 
+.section-divider {
+    margin-top: 11px;
+    margin-bottom: 16px;
+}
+
 .rates-panel .rate-pair {
-    min-width: 91px;
+    min-width: 116px;
 }
 
 .rate-history {
     color: $bright;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .rate-trend {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .rate-trend.up {
@@ -181,7 +186,7 @@ $danger: #C17C5D;
 .unavailable,
 .hint {
     color: $muted;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .unavailable {

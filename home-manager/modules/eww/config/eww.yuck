@@ -3,8 +3,8 @@
   :initial "{\"ok\":false,\"five_used\":0,\"five_left\":0,\"five_reset\":\"—\",\"week_ok\":false,\"week_used\":0,\"week_left\":0,\"week_reset\":\"—\"}"
   "~/.config/eww/scripts/codex-limits.sh")
 
-(defpoll exchange_rates :interval "5m"
-  :initial "{\"ok\":false,\"usd_rub\":\"—\",\"eur_rub\":\"—\",\"btc_usd\":\"—\",\"eth_usd\":\"—\",\"sol_usd\":\"—\",\"usd_month\":\"—\",\"usd_week\":\"—\",\"usd_trend\":\"up\",\"eur_month\":\"—\",\"eur_week\":\"—\",\"eur_trend\":\"up\",\"btc_month\":\"—\",\"btc_week\":\"—\",\"btc_trend\":\"up\",\"eth_month\":\"—\",\"eth_week\":\"—\",\"eth_trend\":\"up\",\"sol_month\":\"—\",\"sol_week\":\"—\",\"sol_trend\":\"up\"}"
+(defpoll exchange_rates :interval "10m"
+  :initial "{\"ok\":false,\"usd_rub\":\"—\",\"eur_rub\":\"—\",\"btc_usd\":\"—\",\"eth_usd\":\"—\",\"sol_usd\":\"—\",\"vt_usd\":\"—\",\"bndw_usd\":\"—\",\"moex_rub\":\"—\",\"ruabitr_rub\":\"—\",\"gold_usd\":\"—\",\"gold_rub\":\"—\",\"usd_month\":\"—\",\"usd_week\":\"—\",\"usd_trend\":\"flat\",\"eur_month\":\"—\",\"eur_week\":\"—\",\"eur_trend\":\"flat\",\"btc_month\":\"—\",\"btc_week\":\"—\",\"btc_trend\":\"flat\",\"eth_month\":\"—\",\"eth_week\":\"—\",\"eth_trend\":\"flat\",\"sol_month\":\"—\",\"sol_week\":\"—\",\"sol_trend\":\"flat\",\"vt_month\":\"—\",\"vt_week\":\"—\",\"vt_trend\":\"flat\",\"bndw_month\":\"—\",\"bndw_week\":\"—\",\"bndw_trend\":\"flat\",\"moex_month\":\"—\",\"moex_week\":\"—\",\"moex_trend\":\"flat\",\"ruabitr_month\":\"—\",\"ruabitr_week\":\"—\",\"ruabitr_trend\":\"flat\",\"gold_usd_month\":\"—\",\"gold_usd_week\":\"—\",\"gold_usd_trend\":\"flat\",\"gold_rub_month\":\"—\",\"gold_rub_week\":\"—\",\"gold_rub_trend\":\"flat\"}"
   "~/.config/eww/scripts/exchange-rates.sh")
 
 ;; Common card header.
@@ -29,12 +29,12 @@
 ;; Compact columns keep current and historical quotes readable at a glance.
 (defwidget rate-row [pair month week trend value]
   (box :class "rate-row" :orientation "h" :space-evenly false
-    (label :class "rate-pair" :text pair :hexpand true :halign "start")
-    (label :class "rate-history month" :text "1MO ${month}" :width 75 :halign "start")
-    (label :class "rate-history week" :text "7D ${week}" :width 62 :halign "start")
+    (label :class "rate-pair" :text pair :width 116 :hexpand true :halign "start" :xalign 0)
+    (label :class "rate-history month" :text "1MO ${month}" :width 84 :halign "start" :xalign 1)
+    (label :class "rate-history week" :text "7D ${week}" :width 75 :halign "start" :xalign 1)
+    (label :class "rate-value" :text value :width 90 :halign "end" :xalign 1)
     (label :class "rate-trend ${trend}"
-           :text {trend == "up" ? "▲" : "▼"} :width 22 :halign "center")
-    (label :class "rate-value" :text value :width 64 :halign "end")))
+           :text {trend == "up" ? "▲" : "▼"} :width 22 :halign "center")))
 
 (defwidget codex-card []
   (box :class "panel codex-panel" :orientation "v" :space-evenly false
@@ -102,6 +102,34 @@
                 :month {exchange_rates.sol_month} :week {exchange_rates.sol_week}
                 :trend {exchange_rates.sol_trend} :value {exchange_rates.sol_usd}))
 
+    (box :class "panel-divider section-divider" :visible {exchange_rates.ok})
+
+    (box :class "rates-body" :orientation "v" :space-evenly false
+         :visible {exchange_rates.ok}
+      (rate-row :pair "VT/USD"
+                :month {exchange_rates.vt_month} :week {exchange_rates.vt_week}
+                :trend {exchange_rates.vt_trend} :value {exchange_rates.vt_usd})
+      (box :class "rate-divider")
+      (rate-row :pair "BNDW/USD"
+                :month {exchange_rates.bndw_month} :week {exchange_rates.bndw_week}
+                :trend {exchange_rates.bndw_trend} :value {exchange_rates.bndw_usd})
+      (box :class "rate-divider")
+      (rate-row :pair "MOEX/RUB"
+                :month {exchange_rates.moex_month} :week {exchange_rates.moex_week}
+                :trend {exchange_rates.moex_trend} :value {exchange_rates.moex_rub})
+      (box :class "rate-divider")
+      (rate-row :pair "RUABITR/RUB"
+                :month {exchange_rates.ruabitr_month} :week {exchange_rates.ruabitr_week}
+                :trend {exchange_rates.ruabitr_trend} :value {exchange_rates.ruabitr_rub})
+      (box :class "rate-divider")
+      (rate-row :pair "GOLD/USD"
+                :month {exchange_rates.gold_usd_month} :week {exchange_rates.gold_usd_week}
+                :trend {exchange_rates.gold_usd_trend} :value {exchange_rates.gold_usd})
+      (box :class "rate-divider")
+      (rate-row :pair "GOLD/RUB"
+                :month {exchange_rates.gold_rub_month} :week {exchange_rates.gold_rub_week}
+                :trend {exchange_rates.gold_rub_trend} :value {exchange_rates.gold_rub}))
+
     (label :class "unavailable"
            :visible {!exchange_rates.ok}
            :text "Rates unavailable")))
@@ -112,7 +140,7 @@
   :windowtype "desktop"
   :wm-ignore false
   :focusable false
-  :geometry (geometry :x "-36px" :y "84px" :width "352px" :anchor "top right")
+  :geometry (geometry :x "-36px" :y "84px" :width "387px" :anchor "top right")
   (codex-card))
 
 (defwindow exchange-rates
@@ -120,5 +148,5 @@
   :windowtype "desktop"
   :wm-ignore false
   :focusable false
-  :geometry (geometry :x "-36px" :y "480px" :width "352px" :anchor "top right")
+  :geometry (geometry :x "-36px" :y "504px" :width "387px" :anchor "top right")
   (exchange-card))

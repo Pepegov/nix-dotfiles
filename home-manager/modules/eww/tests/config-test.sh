@@ -18,8 +18,8 @@ for window in codex-limits exchange-rates; do
   grep -Fq ':wm-ignore false' <<<"$window_definition"
 done
 grep -Fq ':x "-36px"' "$yuck"
-grep -Fq ':y "480px"' "$yuck"
-grep -Fq ':width "352px"' "$yuck"
+grep -Fq ':y "504px"' "$yuck"
+grep -Fq ':width "387px"' "$yuck"
 if grep -Fq ':x "36px"' "$yuck"; then
   exit 1
 fi
@@ -29,6 +29,12 @@ fi
 grep -Fq 'codex-limits.sh' "$yuck"
 grep -Fq 'exchange-rates.sh' "$yuck"
 grep -Fq 'SOL/USD' "$yuck"
+grep -Fq 'VT/USD' "$yuck"
+grep -Fq 'BNDW/USD' "$yuck"
+grep -Fq 'MOEX/RUB' "$yuck"
+grep -Fq 'RUABITR/RUB' "$yuck"
+grep -Fq 'GOLD/USD' "$yuck"
+grep -Fq 'GOLD/RUB' "$yuck"
 grep -Fq 'DISPLAY_EXTERNAL' "$launcher"
 grep -Fq 'DISPLAY_INTERNAL' "$launcher"
 grep -Fq 'open --screen "$screen"' "$launcher"

@@ -10,4 +10,10 @@ jq -e '
   and (.btc_month | test("^(—|[0-9]+)$"))
   and (.sol_week | test("^(—|[0-9]+\\.[0-9]{2})$"))
   and (.btc_trend | test("^(up|down|flat)$"))
+  and (.vt_usd | test("^[0-9]+\\.[0-9]{2}$"))
+  and (.bndw_usd | test("^[0-9]+\\.[0-9]{2}$"))
+  and (.moex_rub | test("^[0-9]+\\.[0-9]{2}$"))
+  and (.ruabitr_rub | test("^[0-9]+\\.[0-9]{2}$"))
+  and (.gold_usd | test("^[0-9]+\\.[0-9]{2}$"))
+  and (.gold_rub | test("^[0-9]+\\.[0-9]{2}$"))
 ' <<<"$output" >/dev/null
