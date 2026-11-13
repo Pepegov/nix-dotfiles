@@ -1,9 +1,10 @@
 { pkgs, lib, ... }:
 
 let
-  whisper = pkgs.whisper-cpp.override {
+  whisperGpu = pkgs.whisper-cpp.override {
     cudaSupport = true;
   };
+  whisperCpu = pkgs.whisper-cpp;
 
   dictation = pkgs.writeShellApplication {
     name = "dictation";
@@ -13,11 +14,14 @@ let
       libnotify
       pipewire
       procps
-      whisper
       xclip
       xdotool
     ];
-    text = builtins.readFile ./dictation.sh;
+    text = ''
+      export DICTATION_WHISPER_CPU="${whisperCpu}/bin/whisper-cli"
+      export DICTATION_WHISPER_GPU="${whisperGpu}/bin/whisper-cli"
+      ${builtins.readFile ./dictation.sh}
+    '';
   };
 in
 {

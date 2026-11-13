@@ -5,6 +5,8 @@ set -uo pipefail
 runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 state_dir="${runtime_dir}/dictation"
 state_file="${state_dir}/state"
+whisper_cpu="${DICTATION_WHISPER_CPU:-whisper-cli}"
+whisper_gpu="${DICTATION_WHISPER_GPU:-whisper-cli}"
 
 notify() {
     notify-send -a "Dictation" "$1" "${2:-}" || true
@@ -20,6 +22,45 @@ read_state() {
     [ -r "${state_file}" ] || return 1
     IFS='|' read -r state recorder_pid focused_window work_dir < "${state_file}"
     [ -n "${state:-}" ] && [ -n "${recorder_pid:-}" ] && [ -n "${work_dir:-}" ]
+}
+
+ensure_model() {
+    local model_dir="$1" model_name="$2" model_file
+    model_file="${model_dir}/ggml-${model_name}.bin"
+
+    if [ ! -s "${model_file}" ]; then
+        mkdir -p "${model_dir}"
+        notify "Загрузка модели" "Whisper ${model_name} скачается один раз."
+        if ! curl --fail --location --retry 5 --retry-all-errors \
+          --output "${model_file}.tmp" \
+          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-${model_name}.bin" \
+          || ! mv "${model_file}.tmp" "${model_file}"; then
+            rm -f "${model_file}.tmp"
+            return 1
+        fi
+    fi
+
+    printf '%s' "${model_file}"
+}
+
+run_whisper() {
+    local cli="$1" model_file="$2" audio_file="$3" output_file="$4"
+    "${cli}" --model "${model_file}" --file "${audio_file}" \
+      --language ru --output-txt --output-file "${output_file}" --no-timestamps --no-prints >/dev/null 2>&1
+}
+
+gpu_available() {
+    command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1
+}
+
+run_gpu_whisper() {
+    local model_file="$1" audio_file="$2" output_file="$3"
+    if command -v nvidia-offload >/dev/null 2>&1; then
+        nvidia-offload "${whisper_gpu}" --model "${model_file}" --file "${audio_file}" \
+          --language ru --output-txt --output-file "${output_file}" --no-timestamps --no-prints >/dev/null 2>&1
+    else
+        run_whisper "${whisper_gpu}" "${model_file}" "${audio_file}" "${output_file}"
+    fi
 }
 
 start_recording() {
@@ -92,30 +133,40 @@ stop_recording() {
         return 1
     fi
 
-    local model_dir model_file
+    local model_dir model_file transcribed_on_gpu=false
     model_dir="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-cpp"
-    model_file="${model_dir}/ggml-small.bin"
 
-    if [ ! -s "${model_file}" ]; then
-        mkdir -p "${model_dir}"
-        notify "Загрузка модели" "Whisper small скачается один раз."
-        if ! curl --fail --location --retry 5 --retry-all-errors \
-          --output "${model_file}.tmp" \
-          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin" \
-          || ! mv "${model_file}.tmp" "${model_file}"; then
-            rm -f "${model_file}.tmp"
-            cleanup "${work_dir}"
-            notify "Не удалось скачать модель Whisper"
-            return 1
+    if gpu_available; then
+        model_file="$(ensure_model "${model_dir}" medium || true)"
+        if [ -n "${model_file}" ]; then
+            notify "Распознавание" "Whisper medium обрабатывает запись на GPU."
+            if run_gpu_whisper "${model_file}" "${audio_file}" "${work_dir}/dictation"; then
+                transcribed_on_gpu=true
+            else
+                rm -f "${work_dir}/dictation.txt"
+                notify "GPU недоступна" "Переключаюсь на Whisper small на CPU."
+            fi
+        else
+            notify "Модель medium недоступна" "Переключаюсь на Whisper small на CPU."
         fi
+    else
+        notify "GPU недоступна" "Использую Whisper small на CPU."
     fi
 
-    notify "Распознавание" "Whisper small обрабатывает запись на GPU."
-    if ! whisper-cli --model "${model_file}" --file "${audio_file}" \
-      --language ru --output-txt --output-file "${work_dir}/dictation" --no-timestamps --no-prints >/dev/null 2>&1; then
-        cleanup "${work_dir}"
-        notify "Не удалось распознать речь"
-        return 1
+    if [ "${transcribed_on_gpu}" = false ]; then
+        model_file="$(ensure_model "${model_dir}" small || true)"
+        if [ -z "${model_file}" ]; then
+            cleanup "${work_dir}"
+            notify "Не удалось скачать модель Whisper small"
+            return 1
+        fi
+
+        notify "Распознавание" "Whisper small обрабатывает запись на CPU."
+        if ! run_whisper "${whisper_cpu}" "${model_file}" "${audio_file}" "${work_dir}/dictation"; then
+            cleanup "${work_dir}"
+            notify "Не удалось распознать речь"
+            return 1
+        fi
     fi
 
     text_file="${work_dir}/dictation.txt"
