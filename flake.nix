@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     openspec.url = "github:Fission-AI/OpenSpec";
     ponytail = {
       url = "github:DietrichGebert/ponytail";
@@ -39,7 +43,7 @@
 
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, vscode-extensions, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, disko, home-manager, vscode-extensions, ... }@inputs:
   let
     system = "x86_64-linux";
     dotnet = pkgs.dotnet-sdk_9;
@@ -60,6 +64,11 @@
     };
   in
   {
+    apps.${system}.disko = {
+      type = "app";
+      program = "${disko.packages.${system}.default}/bin/disko";
+    };
+
     nixosConfigurations.pepegov = nixpkgs.lib.nixosSystem {
       inherit system;
 
@@ -68,7 +77,7 @@
       };
 
       modules = [
-        ./nixos/configuration.nix
+        ./nixos/hosts/pepegov/configuration.nix
       ];
     };
 

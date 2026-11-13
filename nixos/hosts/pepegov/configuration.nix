@@ -8,24 +8,24 @@
       ./hardware-configuration.nix
       
       # Modules
-      ./modules/lock.nix
-      ./modules/work.nix
-      ./modules/networking/networking.nix
-      ./modules/boot.nix
-      ./modules/hardware.nix
-      ./modules/session.nix
-      ./modules/audio.nix
-      ./modules/gpg.nix
-      ./modules/virtualisation.nix
-      ./modules/kdeconnect.nix
-      ./modules/programming.nix
-      ./modules/user.nix
-      ./modules/mount.nix
-      ./modules/magicmouse.nix
-      ./modules/printing.nix
-      ./modules/garbage-collector.nix
-      ./modules/ai.nix
-      ./modules/programs.nix
+      ../../modules/lock.nix
+      ../../modules/work.nix
+      ../../modules/networking/networking.nix
+      ../../modules/boot.nix
+      ../../modules/hardware.nix
+      ../../modules/session.nix
+      ../../modules/audio.nix
+      ../../modules/gpg.nix
+      ../../modules/virtualisation.nix
+      ../../modules/kdeconnect.nix
+      ../../modules/programming.nix
+      ../../modules/user.nix
+      ../../modules/mount.nix
+      ../../modules/magicmouse.nix
+      ../../modules/printing.nix
+      ../../modules/garbage-collector.nix
+      ../../modules/ai.nix
+      ../../modules/programs.nix
     ];
 
   nix.settings = {

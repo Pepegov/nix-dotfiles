@@ -5,6 +5,33 @@ Update system
 sudo nixos-rebuild switch --flake ~/nix --impure
 ```
 
+## Disk layout with Disko
+
+The current system uses `/dev/nvme0n1` as its 512 GB system disk: a 1 GiB EFI
+partition mounted at `/boot` and an ext4 root partition using the remaining
+space. `nixos/hosts/pepegov/disco.nix` recreates exactly this layout.
+
+Run Disko only from a NixOS installer when the contents of `/dev/nvme0n1` may
+be erased. It destroys every partition on that disk. Do not run it against
+`/dev/nvme1n1`, which contains Windows and the data partition.
+
+```bash
+lsblk
+cd ~/nix
+sudo nix --extra-experimental-features "nix-command flakes" run .#disko -- \
+  --mode destroy,format,mount nixos/hosts/pepegov/disco.nix
+```
+
+Disko mounts the new filesystems below `/mnt`. Generate fresh hardware
+configuration after formatting, because the new filesystems have new UUIDs,
+then install the host configuration:
+
+```bash
+cd ~/nix
+nixos-generate-config --root /mnt --show-hardware-config > nixos/hosts/pepegov/hardware-configuration.nix
+sudo nixos-install --flake .#pepegov
+```
+
 Update all flakes
 ```bash
 nix flake update
